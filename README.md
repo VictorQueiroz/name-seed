@@ -1,9 +1,7 @@
 mean-seed
 =========
 
-Mean project seed based on https://github.com/btford/angular-express-seed.
-
-The aim of this project is to facilitate and establish a pattern in the development of applications that follow the standard MEAN (MongoDB, Express, NodeJS and AngularJS). 
+The as same as mean-seed (https://github.com/VictorQueiroz/mean-seed), the only difference is that we use Sequelize ORM and MySQL. 
 
 ### Folder structure
 
@@ -85,7 +83,3 @@ npm install
 bower install
 grunt
 ```
-
-Live reload it's not working yet, but it will.
-
-Under development.
