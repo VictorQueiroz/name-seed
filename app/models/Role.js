@@ -1,9 +1,5 @@
 'use strict';
 
-var User = require('./index');
-
-console.log(User);
-
 module.exports = function (sequelize, DataTypes) {
 	var Role = sequelize.define('Role', {
 		name: DataTypes.STRING
@@ -11,10 +7,7 @@ module.exports = function (sequelize, DataTypes) {
 		freezeTableName: true,
 		timestamps: true,
 		paranoid: false,
-		underscored: true,
-		associate: function (models) {
-			Role.belongsTo(models.User);
-		}
+		underscored: true
 	});
 
 	return Role;

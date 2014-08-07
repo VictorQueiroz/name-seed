@@ -2,6 +2,7 @@
 
 var models = require('../models'),
 Post = models.Post,
+User = models.User,
 passport = require('passport');
 
 exports.list = function (req, res) {
@@ -20,7 +21,10 @@ exports.get = function (req, res) {
 		.find({
 			where:{
 				id: id
-			}
+			},
+			include: [
+				{model: User}
+			]
 		})
 		.success(function(post) {
 			if(post)
@@ -33,7 +37,8 @@ exports.store = function (req, res) {
 
 	Post.create({
 		title: data.title,
-		body: data.body
+		body: data.body,
+		user_id: req.user.id
 	}).complete(function(err, post) {
 		if(post)
 			res.json(post);
