@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>{{ post.title }}</h2>
+			<p>
+				<img src="http://placehold.it/1600x400" width="100%">
+			</p>
+			<p>{{ post.body }}</p>
+			<p>Postado por <a href="/users/{{ post.user.id }}">{{ post.user.name }}</a>.</p>
+		</div>
+	</div>
+</div>

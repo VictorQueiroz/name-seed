@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<table class="table">
+				<thead>
+					<th>Name</th>
+					<th>E-mail address</th>
+					<th>Username</th>
+				</thead>
+
+				<tbody ng-repeat="user in users">
+					<tr>
+						<td><a href="/users/{{ user.id }}" ng-bind="(user.name || '?')"></a></td>
+						<td ng-bind="user.email"></td>
+						<td ng-bind="user.username"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
