@@ -27,6 +27,7 @@
     "errorhandler": "~1.1.1",
     "express": "~4.1.1",
     "express-session": "^1.7.2",
+    "html": "0.0.7",
     "jade": "~0.31.2",
     "lodash": "^2.4.1",
     "method-override": "~1.0.2",

@@ -14,7 +14,7 @@ angular.module('Post/Ctrl/PostCreate', [
 			.$store()
 			.then(function(post) {
 				if(post)
-					$location.path('/posts/' + (post._id ? post._id : null))
+					$location.path('/posts/' + (post.id ? post.id : ''))
 			});
 	};
 }]);

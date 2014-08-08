@@ -7,7 +7,11 @@ passport = require('passport');
 
 exports.list = function (req, res) {
 	Post
-		.findAll()
+		.findAll({
+			include: [{
+				model: User
+			}]
+		})
 		.success(function (posts) {
 			if(posts)
 				res.json(posts);

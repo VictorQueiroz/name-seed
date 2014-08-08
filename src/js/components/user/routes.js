@@ -11,6 +11,11 @@ angular.module('User/Routes', [
 			controller: 'UserDetailCtrl'
 		})
 
+		.when('/register', {
+			templateUrl: 'users/create.tpl.html',
+			controller: 'UserCreateCtrl'
+		})		
+
 		.when('/profile', {
 			templateUrl: 'users/profile.tpl.html',
 			controller: 'ProfileCtrl'

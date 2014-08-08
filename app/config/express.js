@@ -18,7 +18,8 @@ module.exports = function (sequelize) {
 
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', path.join(__dirname, '../views'));
-	app.set('view engine', 'jade');
+	app.engine('html', require('ejs').renderFile);
+	app.set('view engine', 'html');
 
 	// Enable jsonp
 	app.enable('jsonp callback');
@@ -54,9 +55,9 @@ module.exports = function (sequelize) {
 	app.use(express.static(path.join(__dirname, '../../public')));
 
 	/**
-	 * Transfer the 'bower_components' folder contents to '/js/vendor' of the 'public' folder.
+	 * Transfer the 'bower_components' folder contents to '/vendor' of the 'public' folder.
 	 */
-	app.use('/js/vendor', express.static(path.join(__dirname, '../../bower_components')));
+	app.use('/vendor', express.static(path.join(__dirname, '../../bower_components')));
 
 	// Development only
 	if (app.get('env') === 'development') {

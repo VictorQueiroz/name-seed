@@ -16,6 +16,8 @@ var rename = require('gulp-rename');
 var livereload = require('gulp-livereload');
 var nodemon = require('gulp-nodemon');
 
+var fs = require('fs');
+
 var paths = {};
 paths.partials = ['src/partials/**/{,*/}*.html'];
 paths.stylesheets = ['src/scss/**/{,*/}*.{scss,sass}'];
@@ -36,12 +38,6 @@ gulp.task('stylesheets', ['clean'], function () {
 			basename: 'style', suffix: '.min'
 		}))
 		.pipe(gulp.dest(paths.public + '/css'));
-
-	// gulp.src('public/css/**/{,*/}*.css')
-	// 	.pipe(uncss({
-	// 		html: ['src/partials/index.tpl.html']
-	// 	}))
-	// 	.pipe(gulp.dest('public/css'));
 });
 
 gulp.task('scripts', ['clean'], function () {
@@ -73,7 +69,15 @@ gulp.task('partials', ['clean'], function () {
 });
 
 gulp.task('server', function () {
-	require('./server');
+	// require('./server');
+	nodemon({
+		script: 'server.js',
+		ext: 'html js'
+	})
+
+	.on('restart', function () {
+		console.log('Restarting server...');
+	});
 });
 
 gulp.task('watch', function () {
