@@ -20,14 +20,12 @@ module.exports = function () {
         .success(function(user) {
           if(user) {
             // User with this fb_id exist, authenticating.
-            console.log('User with this fb_id exist, authenticating.');
             return done(null, user);
           } else {
           /**
            * User with this fb_id does not exist, checking if there
            * is a user with this email address.
            */
-            console.log('User with this fb_id does not exist, checking if there is a user with this email address.');
             User
             .find({ email: profile.email })
             .success(function(user) {
@@ -36,7 +34,6 @@ module.exports = function () {
                  * User with this email address does not exist
                  * either, creating a new one.
                  */
-                console.log('User with this email address does not exist either, creating a new one.');
                 User
                   .create({
                     name: profile.displayName,
@@ -47,7 +44,6 @@ module.exports = function () {
                   })
 
                   .success(function(user) { // Authenticating the new user.
-                    console.log('Authenticating the new user.');
                     done(null, user);
                   });
               } else {
@@ -55,7 +51,6 @@ module.exports = function () {
                 //  * User with this email exists, setting his fb_id
                 //  * with the same as his facebook account for good!
                 //  */
-                // console.log('User with this email exists, setting his fb_id with the same as his facebook account for good!');
                 // User
                 //   .update({
                 //     fb_id: profile.id
