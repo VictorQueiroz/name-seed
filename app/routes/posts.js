@@ -1,7 +1,7 @@
 'use strict';
 
 var controllers = require('../controllers'),
-		passport = require('passport');
+passport = require('passport');
 
 module.exports = function (app) {
 	var ctrl = controllers.posts;

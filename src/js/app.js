@@ -1,7 +1,5 @@
 'use strict';
 
-var socket = io.connect();
-
 angular.module('App', [
 	'ngRoute',
 	'ngAnimate',
@@ -19,4 +17,10 @@ angular.module('App', [
 	'App/Partials',
 
 	'Auth'
-]);
+])
+
+.run(['$io', function($io) {
+	$io.socket.then(function(socket) {
+		//
+	});
+}]);
