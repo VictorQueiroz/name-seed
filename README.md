@@ -15,8 +15,7 @@ app/
   models/
     user.js
   views/
-    layout.jade
-    index.jade
+    index.html
 public/
 src/
   js/
