@@ -34,17 +34,27 @@ module.exports = function () {
                  * User with this email address does not exist
                  * either, creating a new one.
                  */
+                var password = generatePassword(12, false);
+
                 User
                   .create({
                     name: profile.displayName,
                     email: profile.emails[0].value,
-                    password: generatePassword(12, false),
+                    password: password,
                     username: profile.displayName.toString().toLowerCase().replace(/ /g, ''),
                     fb_id: profile.id
                   })
 
-                  .success(function(user) { // Authenticating the new user.
-                    done(null, user);
+                  .success(function() { // Authenticating the new user.
+                    User
+                      .find({
+                        email: profile.emails[0].value,
+                        password: password
+                      })
+                      .success(function(user) {
+                        if(user)
+                          done(null, user);
+                      });
                   });
               } else {
                 // /**

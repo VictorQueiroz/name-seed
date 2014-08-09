@@ -2,7 +2,9 @@
 
 var models = require('../models'),
 User = models.User,
-passport = require('passport');
+Role = models.Role,
+passport = require('passport'),
+_ = require('underscore-node');
 
 exports.list = function (req, res) {
 	User
@@ -17,11 +19,7 @@ exports.get = function (req, res) {
 	var id = req.params.id;
 
 	User
-		.find({
-			where:{
-				id: id
-			}
-		})
+		.find({ id: id })
 		.success(function(user) {
 			if(user)
 				res.json(user);
@@ -31,15 +29,17 @@ exports.get = function (req, res) {
 exports.store = function (req, res) {
 	var data = req.body;
 
-	User.create({
-		username: data.username,
-		email: data.email,
-		name: data.name,
-		password: data.password
-	}).complete(function(err, user) {
-		if(user)
-			res.json(user);
-	});
+	User
+		.create(_.pick(data,
+			'username',
+			'email',
+			'name',
+			'password'
+		))
+		.complete(function(err, user) {
+			if(user)
+				res.json(user);
+		});
 };
 
 exports.update = function (req, res) {
@@ -47,16 +47,14 @@ exports.update = function (req, res) {
 	var data = req.body;
 
 	User
-		.findById(id)
-		.success(function(err, user) {
-			Object.keys(data).forEach(function(key) {
-				if(user[key] != 'undefined')
-					user[key] = data[key];
-			});
-
-			user.save();
-
-			res.json(user);
+		.update(_.pick(data, 'name', 'username', 'email'), { id: id })
+		.success(function() {
+			User
+				.find({	id: id })
+				.success(function(user) {
+					if(user)
+						res.json(user);
+				});
 		});
  };
 
@@ -66,9 +64,8 @@ exports.destroy = function (req, res) {
 	User
 		.destroy({ id: id })
 		.success(function() {
-			User.find({
-				id: id
-			}).success(function(user) {
+			User.find({ id: id })
+			.success(function(user) {
 				if(!user)
 					res.json({ result: true });
 				else

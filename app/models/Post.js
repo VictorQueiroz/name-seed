@@ -5,10 +5,10 @@ module.exports = function (sequelize, DataTypes) {
 		title: DataTypes.STRING,
 		body: DataTypes.TEXT
 	}, {
-		freezeTableName: true,
-		timestamps: true,
-		paranoid: false,
-		underscored: true
+    freezeTableName: true,
+    timestamps: true,
+    paranoid: false,
+    underscored: true,		
 	});
 
 	return Post;

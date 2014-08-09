@@ -26,10 +26,10 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.STRING
 		}
 	}, {
-		freezeTableName: true,
-		timestamps: true,
-		paranoid: false,
-		underscored: true,
+    freezeTableName: true,
+    timestamps: true,
+    paranoid: false,
+    underscored: true,
     classMethods: {
       associate: function(models) {
       	var Post = models.Post;

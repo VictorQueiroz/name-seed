@@ -14,7 +14,7 @@ module.exports = function (app) {
 	app.route('/api/users/:id').delete(ctrl.destroy);
 
 	app.route('/auth/local').post(passport.authenticate('local'), function(req, res) {
-		if(req.user)
+		if(req.isAuthenticated())
 			res.json({result: true});
 		else
 			res.json({result: false});
@@ -23,7 +23,7 @@ module.exports = function (app) {
 	app.route('/auth/facebook').get(passport.authenticate('facebook', {
 		scope: ['email']
 	}), function(req, res) {
-		if(req.user)
+		if(req.isAuthenticated())
 			res.json({result: true});
 		else
 			res.json({result: false});
