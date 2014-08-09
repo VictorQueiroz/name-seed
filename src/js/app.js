@@ -7,6 +7,10 @@ angular.module('App', [
 	'ngAnimate',
 	'ngSanitize',
 
+	'pascalprecht.translate',
+	'ui.bootstrap',
+	'mgcrea.ngStrap',	
+
 	'App/Routes',
 	'App/Controllers',
 	'App/Filters',
@@ -14,8 +18,5 @@ angular.module('App', [
 	'App/Services',
 	'App/Partials',
 
-	'Auth',
-
-	'ui.bootstrap',
-	'mgcrea.ngStrap'
+	'Auth'
 ]);

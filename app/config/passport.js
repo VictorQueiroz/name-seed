@@ -1,8 +1,9 @@
 'use strict';
 
 var passport = require('passport'),
-		path = require('path'),
-		User = require('../models').User;
+path = require('path'),
+User = require('../models').User,
+fs = require('fs');		
 
 module.exports = function() {
 	// Serialize sessions
@@ -23,5 +24,12 @@ module.exports = function() {
 			});
 	});
 
-	require('./strategies/local')();
+	fs
+		.readdirSync(__dirname + '/strategies')
+		.filter(function(file) {
+			return (file !== 'index.js');
+		})
+		.forEach(function(file) {
+			require(path.join(__dirname, './strategies/' + file))();
+		});
 };

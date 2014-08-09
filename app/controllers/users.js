@@ -64,11 +64,15 @@ exports.destroy = function (req, res) {
 	var id = req.params.id;
 
 	User
-		.findById(id)
-		.success(function(err, user) {
-			if(user.remove())
-				res.json({result: true});
-			else
-				res.json({result: false});
+		.destroy({ id: id })
+		.success(function() {
+			User.find({
+				id: id
+			}).success(function(user) {
+				if(!user)
+					res.json({ result: true });
+				else
+					res.json({ result: false });
+			});
 		});
 };

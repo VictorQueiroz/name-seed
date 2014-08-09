@@ -20,6 +20,20 @@ module.exports = function (app) {
 			res.json({result: false});
 	});
 
+	app.route('/auth/facebook').get(passport.authenticate('facebook', {
+		scope: ['email']
+	}), function(req, res) {
+		if(req.user)
+			res.json({result: true});
+		else
+			res.json({result: false});
+	});
+
+	app.route('/auth/facebook/callback').get(passport.authenticate('facebook', {
+		successRedirect: '/',
+		failureRedirect: '/login'
+	}));
+
 	app.route('/auth/check').get(function(req, res, next) {
 		if(req.isAuthenticated())
 			res.json({result: true, user: req.user});

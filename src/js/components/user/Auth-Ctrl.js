@@ -4,7 +4,7 @@ angular.module('User/Ctrl/Auth', [
 	'App/Services'
 ])
 
-.controller('AuthCtrl', ['$scope', '$http', '$alert', '$socket', '$location', function ($scope, $http, $alert, $socket, $location) {
+.controller('AuthCtrl', ['$scope', '$http', '$alert', '$socket', '$location', '$window', function ($scope, $http, $alert, $socket, $location, $window) {
 	$socket.on('user authenticated', function(user) {
 		alert('Congratulations, '+user.username+', you\'re logged!');
 	});
@@ -31,5 +31,9 @@ angular.module('User/Ctrl/Auth', [
 			else
 				$socket.emit('user authentication error', {});
 		});
+	};
+
+	$scope.authenticateWithFB = function () {
+		$window.location.href = '/auth/facebook';
 	};
 }]);

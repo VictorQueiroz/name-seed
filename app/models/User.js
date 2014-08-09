@@ -9,6 +9,22 @@ module.exports = function (sequelize, DataTypes) {
 			isEmail: true
 		},
 		password: DataTypes.STRING,
+
+		fb_id: { // Facebook
+			type: DataTypes.STRING
+		},
+
+		go_id: { // Google
+			type: DataTypes.STRING
+		},
+
+		tw_id: { // Twitter
+			type: DataTypes.STRING
+		},
+
+		gh_id: { // Github
+			type: DataTypes.STRING
+		}
 	}, {
 		freezeTableName: true,
 		timestamps: true,
