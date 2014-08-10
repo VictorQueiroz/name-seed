@@ -5,5 +5,10 @@ angular.module('Post/Ctrl/PostList', [
 ])
 
 .controller('PostListCtrl', ['$scope', 'Post', function ($scope, Post) {
-	var posts = $scope.posts = Post.list();
+	$scope.$on('page changed', function(event, page) {
+		Post.list({ page: page }).$promise.then(function(paginator) {
+			$scope.posts = paginator.data;
+			$scope.paginator = paginator;
+		});
+	});
 }]);

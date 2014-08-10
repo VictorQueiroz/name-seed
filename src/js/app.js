@@ -5,9 +5,10 @@ angular.module('App', [
 	'ngAnimate',
 	'ngSanitize',
 
-	'pascalprecht.translate',
 	'ui.bootstrap',
 	'mgcrea.ngStrap',	
+	'pascalprecht.translate',
+	'victorqueiroz.ngPaginator',
 
 	'App/Routes',
 	'App/Controllers',

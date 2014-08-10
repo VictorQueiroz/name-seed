@@ -2,16 +2,31 @@
 
 var models = require('../models'),
 User = models.User,
-Role = models.Role,
 passport = require('passport'),
-_ = require('underscore-node');
+_ = require('underscore-node'),
+pagination = require('pagination');
 
 exports.list = function (req, res) {
+	var query = req.query;
+
 	User
 		.findAll()
 		.success(function (users) {
-			if(users)
-				res.json(users);
+			if(users) {
+				var paginator = new pagination.SearchPagination({
+					prelink: '/',
+					current: (query.page ? query.page : 1),
+					rowsPerPage: query.per_page ? query.per_page : 5,
+					totalResult: users.length
+				}).getPaginationData();
+
+				var fromResult = paginator.fromResult;
+				var toResult = paginator.toResult;
+
+				paginator.data = users.slice((fromResult - 1), toResult);
+
+				res.json(paginator);				
+			}
 		});
 };
 
@@ -27,16 +42,16 @@ exports.get = function (req, res) {
 };
 
 exports.store = function (req, res) {
-	var data = req.body;
+	var data = _.pick(req.body,
+		'username',
+		'email',
+		'name',
+		'password'
+	);
 
 	User
-		.create(_.pick(data,
-			'username',
-			'email',
-			'name',
-			'password'
-		))
-		.complete(function(err, user) {
+		.create(data)
+		.success(function(user) {
 			if(user)
 				res.json(user);
 		});

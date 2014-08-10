@@ -3,9 +3,13 @@
 var models = require('../models'),
 Post = models.Post,
 User = models.User,
-passport = require('passport');
+passport = require('passport'),
+pagination = require('pagination'),
+_ = require('underscore-node');
 
 exports.list = function (req, res) {
+	var query = req.query;
+
 	Post
 		.findAll({
 			include: [{
@@ -13,8 +17,18 @@ exports.list = function (req, res) {
 			}]
 		})
 		.success(function (posts) {
-			if(posts)
-				res.json(posts);
+			if(posts) {
+				var paginator = pagination.create('search', {
+					prelink: '/',
+					current: query.page ? query.page : 1,
+					rowsPerPage: query.per_page ? query.per_page : 5,
+					totalResult: posts.length
+				}).getPaginationData();
+
+				paginator.data = posts.slice((paginator.fromResult - 1), paginator.toResult);
+
+				res.json(paginator);
+			}
 		});
 };
 
@@ -22,14 +36,7 @@ exports.get = function (req, res) {
 	var id = req.params.id;
 
 	Post
-		.find({
-			where:{
-				id: id
-			},
-			include: [
-				{model: User}
-			]
-		})
+		.find({ id: id })
 		.success(function(post) {
 			if(post)
 				res.json(post);
@@ -37,33 +44,32 @@ exports.get = function (req, res) {
 };
 
 exports.store = function (req, res) {
-	var data = req.body;
+	var data = _.pick(req.body,
+		'title',
+		'body'
+	);
 
-	Post.create({
-		title: data.title,
-		body: data.body,
-		user_id: req.user.id
-	}).complete(function(err, post) {
-		if(post)
-			res.json(post);
-	});
+	Post
+		.create(data)
+		.success(function(post) {
+			if(post)
+				res.json(post);
+		});
 };
 
 exports.update = function (req, res) {
 	var id = req.params.id;
-	var data = req.body;
+	var data = _.pick(req.body, 'title', 'body');
 
 	Post
-		.findById(id)
-		.success(function(err, post) {
-			Object.keys(data).forEach(function(key) {
-				if(post[key] != 'undefined')
-					post[key] = data[key];
-			});
-
-			post.save();
-
-			res.json(post);
+		.update(data, { id: id })
+		.success(function() {
+			Post
+				.find({	id: id })
+				.success(function(post) {
+					if(post)
+						res.json(post);
+				});
 		});
  };
 
@@ -71,11 +77,14 @@ exports.destroy = function (req, res) {
 	var id = req.params.id;
 
 	Post
-		.findById(id)
-		.success(function(err, post) {
-			if(post.remove())
-				res.json({result: true});
-			else
-				res.json({result: false});
+		.destroy({ id: id })
+		.success(function() {
+			Post.find({ id: id })
+			.success(function(post) {
+				if(!post)
+					res.json({ result: true });
+				else
+					res.json({ result: false });
+			});
 		});
 };
