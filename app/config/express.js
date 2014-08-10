@@ -4,10 +4,24 @@ var express = require('express'),
 session = require('express-session'),
 bodyParser = require('body-parser'),
 cookieParser = require('cookie-parser'),
-cors = require('cors'),
+
+/**
+ * This module provides "guest" sessions, meaning any visitor
+ * will have a session, authenticated or not. If a session is
+ * new a Set-Cookie will be produced regardless of populating
+ * the session.
+ */
+cookieSession = require('cookie-session'),
+
+csrf = require('csurf'),
 methodOverride	= require('method-override'),
 errorhandler = require('errorhandler'),
 morgan = require('morgan'),
+
+// Returns middleware that adds a X-Response-Time header to responses.
+responseTime = require('response-time'),
+
+cors = require('cors'),
 http = require('http'),
 path = require('path'),
 passport = require('passport'),
@@ -26,6 +40,8 @@ module.exports = function (sequelize) {
 
 	app.use(cors());
 
+	app.use(responseTime());
+
 	app.use(morgan('dev'));
 
 	app.use(bodyParser.urlencoded({
@@ -42,13 +58,22 @@ module.exports = function (sequelize) {
 		saveUninitialized: true,
 		resave: true,
 		proxy: true,
+		secureProxy: true,
 		store: new SequelizeStore({
 			db: sequelize
 		})
 	}));
+
+	app.use(csrf());
 	
 	app.use(passport.initialize());
 	app.use(passport.session());
+
+	app.use(function(req, res, next) {
+		res.send(req.csrfToken());
+
+		next();
+	});
 
 	app.disable('x-powered-by');
 
