@@ -14,6 +14,6 @@ module.exports = function (app, io) {
 		});
 
 	app.route('*').get(function(req, res) {
-  	res.render('index', {_csrf: req.csrfToken()});
+  	res.render('index', { _csrf: req.csrfToken() });
   });
 };

@@ -16,7 +16,11 @@ module.exports = function () {
     },
     function(accessToken, refreshToken, profile, done) {
       User
-        .find({ fb_id: profile.id })
+        .find({
+          where: {
+            fb_id: profile.id
+          }
+        })
         .success(function(user) {
           if(user) {
             // User with this fb_id exist, authenticating.
@@ -27,7 +31,11 @@ module.exports = function () {
            * is a user with this email address.
            */
             User
-            .find({ email: profile.email })
+            .find({
+              where: {
+                email: profile.emails[0].value
+              }
+            })
             .success(function(user) {
               if(!user) {
                 /**
@@ -45,16 +53,8 @@ module.exports = function () {
                     fb_id: profile.id
                   })
 
-                  .success(function() { // Authenticating the new user.
-                    User
-                      .find({
-                        email: profile.emails[0].value,
-                        password: password
-                      })
-                      .success(function(user) {
-                        if(user)
-                          done(null, user);
-                      });
+                  .success(function(user) { // Authenticating the new user.
+                    done(null, user);
                   });
               } else {
                 // /**

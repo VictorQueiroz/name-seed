@@ -30,38 +30,42 @@ var hasRole = function (roleId, callback) {
 };
 
 exports.guest = function (req, res, next) {
-	if(!req.isAuthenticated())
-		res.status(404).redirect('/');
+	if(req.isAuthenticated())
+		return res.status(404).redirect('/');
+
+	next();
 };
 
 exports.authenticated = function (req, res, next) {
 	if(!req.isAuthenticated())
-		res.status(404).redirect('/');
+		return res.status(404).redirect('/');
+
+	next();
 };
 
 exports.administrator = function (req, res, next) {
 	hasRole(2, function(roles) {
 		if(roles.length > 0)
-			next();
-		else
-			res.status(404).redirect('/');
+			return next();
+		
+		res.status(404).redirect('/');
 	})(req, res, next);
 };
 
 exports.owner = function (req, res, next) {
 	hasRole(3, function(roles) {
 		if(roles.length > 0)
-			next();
-		else
-			res.status(404).redirect('/');
+			return next();
+		
+		res.status(404).redirect('/');
 	})(req, res, next);
 };
 
 exports.user = function (req, res, next) {
 	hasRole(1, function(roles) {
 		if(roles.length > 0)
-			next();
-		else
-			res.status(404).redirect('/');
+			return next();
+		
+		res.status(404).redirect('/');
 	})(req, res, next);
 };
