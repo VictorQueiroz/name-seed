@@ -3,12 +3,17 @@
 var controllers = require('../controllers'),
 passport = require('passport');
 
-module.exports = function (app) {
+module.exports = function (app, io) {
 	var ctrl = controllers.posts;
 
-	app.route('/api/posts').get(ctrl.list);
-	app.route('/api/posts/:id').get(ctrl.get);
-	app.route('/api/posts').post(ctrl.store);
-	app.route('/api/posts/:id').put(ctrl.update);
-	app.route('/api/posts/:id').delete(ctrl.destroy);
+	app
+		.route('/api/posts/:id')
+		.get(ctrl.get)
+		.put(ctrl.update)
+		.delete(ctrl.destroy);
+
+	app
+		.route('/api/posts')
+		.get(ctrl.list)
+		.post(ctrl.store);
 };

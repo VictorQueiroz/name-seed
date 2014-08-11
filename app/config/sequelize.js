@@ -1,9 +1,12 @@
+'use strict';
+
 var Sequelize = require('sequelize'),
 options = require('./config').database;
 
 var sequelize = new Sequelize(options.database, options.user, options.password, {
 	host: options.host,
-	dialect: 'mysql'
+	dialect: 'mysql',
+  logging: console.log
 });
 
 sequelize

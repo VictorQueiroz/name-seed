@@ -10,25 +10,28 @@ _ = require('underscore-node');
 exports.list = function (req, res) {
 	var query = req.query;
 
+	query.page = parseInt(query.page ? query.page : 1);
+	query.per_page = query.per_page ? query.per_page : 4;
+
+	var offset = (query.page * query.per_page) - 1,
+	limit = parseInt(query.per_page);
+
 	Post
-		.findAll({
-			include: [{
-				model: User
-			}]
+		.findAndCountAll({
+			limit: limit,
+			offset: offset,
+			order: 'updated_at DESC'
 		})
-		.success(function (posts) {
-			if(posts) {
-				var paginator = pagination.create('search', {
-					prelink: '/',
-					current: query.page ? query.page : 1,
-					rowsPerPage: query.per_page ? query.per_page : 5,
-					totalResult: posts.length
-				}).getPaginationData();
 
-				paginator.data = posts.slice((paginator.fromResult - 1), paginator.toResult);
+		.success(function(result) {
+			var posts = result.rows;
+			var count = result.count;
 
-				res.json(paginator);
-			}
+			res.json({
+				current: query.page,
+				pageCount: Math.ceil(count / limit - 1),
+				data: posts
+			});
 		});
 };
 
@@ -36,7 +39,15 @@ exports.get = function (req, res) {
 	var id = req.params.id;
 
 	Post
-		.find({ id: id })
+		.find({
+			where: {
+				id: id
+			},
+
+			include: [{
+				model: User
+			}]
+		})
 		.success(function(post) {
 			if(post)
 				res.json(post);
@@ -48,6 +59,8 @@ exports.store = function (req, res) {
 		'title',
 		'body'
 	);
+
+	data.user_id = req.user.id;
 
 	Post
 		.create(data)

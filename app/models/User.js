@@ -2,8 +2,8 @@
 
 module.exports = function (sequelize, DataTypes) {
 	var User = sequelize.define('User', {
-		name: DataTypes.STRING,
-		username: DataTypes.STRING,
+		name: DataTypes.STRING (100),
+		username: DataTypes.STRING (16),
 		email: {
 			type: DataTypes.STRING,
 			isEmail: true
@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
       	var Role = models.Role;
 
 				Post.belongsTo(User);
-				Role.belongsTo(User);
+				Role.hasMany(User);
 
 				User.hasMany(Post);
 				User.hasMany(Role);

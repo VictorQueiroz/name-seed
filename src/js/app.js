@@ -20,6 +20,14 @@ angular.module('App', [
 	'Auth'
 ])
 
+.constant('_CSRF', angular.element(document.querySelector('meta[name=_csrf]')).attr('content'))
+
+.config(['$httpProvider', '_CSRF', function ($httpProvider, _CSRF) {
+	$httpProvider.defaults.headers.common = {
+		'x-csrf-token': _CSRF
+	};
+}])
+
 .run(['$io', function($io) {
 	$io.socket.then(function(socket) {
 		//

@@ -21,6 +21,7 @@ morgan = require('morgan'),
 // Returns middleware that adds a X-Response-Time header to responses.
 responseTime = require('response-time'),
 
+favicon = require('serve-favicon'),
 cors = require('cors'),
 http = require('http'),
 path = require('path'),
@@ -32,13 +33,13 @@ module.exports = function (sequelize) {
 
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', path.join(__dirname, '../views'));
-	app.engine('html', require('ejs').renderFile);
-	app.set('view engine', 'html');
+	app.set('view engine', 'ejs');
 
 	// Enable jsonp
 	app.enable('jsonp callback');
 
 	app.use(cors());
+	app.use(favicon(path.join(__dirname, '../../public/favicon.ico')));
 
 	app.use(responseTime());
 
@@ -68,12 +69,6 @@ module.exports = function (sequelize) {
 	
 	app.use(passport.initialize());
 	app.use(passport.session());
-
-	app.use(function(req, res, next) {
-		res.send(req.csrfToken());
-
-		next();
-	});
 
 	app.disable('x-powered-by');
 

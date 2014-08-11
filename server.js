@@ -21,6 +21,6 @@ db.sequelize.sync().complete(function(err){
 /**
  * Routes
  */
-require('./app/routes')(app);
+require('./app/routes')(app, io);
 
 module.exports = app;

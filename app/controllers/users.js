@@ -2,31 +2,35 @@
 
 var models = require('../models'),
 User = models.User,
+Role = models.Role,
 passport = require('passport'),
-_ = require('underscore-node'),
-pagination = require('pagination');
+_ = require('underscore-node');
 
 exports.list = function (req, res) {
 	var query = req.query;
 
+	query.page = parseInt(query.page ? query.page : 1);
+	query.per_page = query.per_page ? query.per_page : 4;
+
+	var offset = (query.page * query.per_page) - 1,
+	limit = parseInt(query.per_page);
+
 	User
-		.findAll()
-		.success(function (users) {
-			if(users) {
-				var paginator = new pagination.SearchPagination({
-					prelink: '/',
-					current: (query.page ? query.page : 1),
-					rowsPerPage: query.per_page ? query.per_page : 5,
-					totalResult: users.length
-				}).getPaginationData();
+		.findAndCountAll({
+			limit: limit,
+			offset: offset,
+			order: 'updated_at DESC'
+		})
 
-				var fromResult = paginator.fromResult;
-				var toResult = paginator.toResult;
+		.success(function(result) {
+			var users = result.rows;
+			var count = result.count;
 
-				paginator.data = users.slice((fromResult - 1), toResult);
-
-				res.json(paginator);				
-			}
+			res.json({
+				current: query.page,
+				pageCount: Math.ceil(count / limit - 1),
+				data: users
+			});
 		});
 };
 
@@ -52,8 +56,23 @@ exports.store = function (req, res) {
 	User
 		.create(data)
 		.success(function(user) {
-			if(user)
-				res.json(user);
+			if(user) {
+				Role.find({ where: { id: 1 } }).success(function(role) {
+					user.setRoles([role]).success(function() {
+						User.find({
+							where: {
+								id: user.id
+							},
+
+							include: [{
+								model: Role
+							}]
+						}).success(function(user) {
+							res.json(user);
+						});
+					});
+				});
+			}
 		});
 };
 

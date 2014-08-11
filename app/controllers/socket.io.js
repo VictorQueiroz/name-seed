@@ -1,6 +1,8 @@
 'use strict';
 
-var User = require('../models').User;
+var models = require('../models'),
+User = models.User,
+Post = models.Post;
 
 module.exports = function (io) {
 	io.on('connection', function (socket) {
@@ -10,8 +12,26 @@ module.exports = function (io) {
 			socket.emit('user authenticated', user);
 		});
 
-		socket.on('user new', function (_id) {
-			socket.broadcast.emit('user new', {name: 'Novo usuário.'});
+		socket.on('user new', function (id) {
+			User.find({
+				where: {
+					id: id
+				}
+			})
+			.success(function(user) {
+				socket.broadcast.emit('user new', user);
+			});
+		});
+
+		socket.on('post new', function (id) {
+			Post.find({
+				where: {
+					id: id
+				}
+			})
+			.success(function(post) {
+				socket.broadcast.emit('post new', post);
+			});			
 		});
 
 		socket.on('user all', function () {

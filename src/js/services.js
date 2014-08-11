@@ -15,7 +15,9 @@ angular.module('App/Services', [
 
 	return {
 		socket: io().then(function(io) {
-			return io.connect();
+			var socket = io.connect();
+
+			return socket;
 		})
 	};
 }]);
