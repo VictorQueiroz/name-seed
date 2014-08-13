@@ -8,7 +8,7 @@ fs = require('fs');
 module.exports = function() {
 	// Serialize sessions
 	passport.serializeUser(function(user, done) {
-		done(null, user.id);
+		return done(null, user.id);
 	});
 
 	// Deserialize sessions
@@ -20,7 +20,7 @@ module.exports = function() {
 				}
 			})
 			.success(function(user) {
-				done(null, user);
+				return done(null, user);
 			});
 	});
 

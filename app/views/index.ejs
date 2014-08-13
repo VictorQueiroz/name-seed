@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="_csrf" content="<%= _csrf %>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <base href="/">
     <title>My first application</title>
@@ -18,7 +20,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Home							</a></li>
+            <li><a href="/">Home</a></li>
             <li if-guest><a href="/about-us">About us</a></li>
             <li if-authenticated><a href="/posts">Posts</a></li>
           </ul>

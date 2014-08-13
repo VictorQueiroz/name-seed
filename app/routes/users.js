@@ -16,23 +16,13 @@ module.exports = function (app) {
 		.put(filters.administrator, ctrl.update)
 		.delete(filters.administrator, ctrl.destroy);
 
-	app.route('/auth/local').post(filters.guest, passport.authenticate('local'), function(req, res) {
-		if(req.isAuthenticated())
-			res.json({result: true});
-		else
-			res.json({result: false});
-	});
+	app.route('/auth/local').post(filters.guest, passport.authenticate('local'));
 
-	app.route('/auth/facebook').get(filters.guest, passport.authenticate('facebook', {
-		scope: ['email']
-	}), function(req, res) {
-		if(req.isAuthenticated())
-			res.json({result: true});
-		else
-			res.json({result: false});
-	});
+	app.route('/auth/facebook').get(passport.authenticate('facebook', {
+		scope: ['email', 'read_stream']
+	}));
 
-	app.route('/auth/facebook/callback').get(filters.guest, passport.authenticate('facebook', {
+	app.route('/auth/facebook/callback').get(passport.authenticate('facebook', {
 		successRedirect: '/',
 		failureRedirect: '/login'
 	}));
@@ -44,7 +34,7 @@ module.exports = function (app) {
 			res.json({result: false});
 	});
 
-	app.route('/auth/destroy').get(filters.authenticated, function(req, res, next) {
+	app.route('/auth/destroy').get(function(req, res, next) {
 		req.logout();
 		res.redirect('/');
 	});

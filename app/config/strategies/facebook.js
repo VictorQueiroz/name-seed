@@ -2,8 +2,8 @@ var passport = require('passport'),
 FacebookStrategy = require('passport-facebook').Strategy,
 User = require('../../models').User,
 
-FACEBOOK_APP_ID = '1496855677198940',
-FACEBOOK_APP_SECRET = '24cc0d4cb8f9a79eb474cc47839da72e',
+FACEBOOK_APP_ID = '1451750288423459',
+FACEBOOK_APP_SECRET = 'ff03e49369c91ea824c9107480301e98',
 
 generatePassword = require('password-generator');
 
@@ -11,11 +11,12 @@ module.exports = function () {
   passport.use(new FacebookStrategy({
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
-      callbackURL: "http://localhost:3000/auth/facebook/callback",
-      enableProof: true
+      callbackURL: '/auth/facebook/callback',
+      enableProof: false
     },
     function(accessToken, refreshToken, profile, done) {
-      User
+      process.nextTick(function () {
+        User
         .find({
           where: {
             fb_id: profile.id
@@ -54,7 +55,7 @@ module.exports = function () {
                   })
 
                   .success(function(user) { // Authenticating the new user.
-                    done(null, user);
+                    return done(null, user);
                   });
               } else {
                 // /**
@@ -72,11 +73,12 @@ module.exports = function () {
                 //     done(null, user);
                 //   });
 
-                done(null, user);
+                return done(null, user);
               }
             });
           }
-        });
+        });        
+      });
     }
   ));
 };

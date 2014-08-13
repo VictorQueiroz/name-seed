@@ -98,12 +98,13 @@ exports.destroy = function (req, res) {
 	User
 		.destroy({ id: id })
 		.success(function() {
-			User.find({ id: id })
-			.success(function(user) {
-				if(!user)
-					res.json({ result: true });
-				else
-					res.json({ result: false });
-			});
+			User
+				.find({ id: id })
+				.success(function(user) {
+					if(!user)
+						res.json({ result: true });
+					else
+						res.json({ result: false });
+				});
 		});
 };
