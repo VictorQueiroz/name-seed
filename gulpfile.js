@@ -69,10 +69,8 @@ gulp.task('partials', ['clean'], function () {
 });
 
 gulp.task('server', function () {
-	// require('./server');
 	nodemon({
-		script: 'server.js',
-		ext: 'html js'
+		script: 'server.js'
 	})
 
 	.on('restart', function () {
