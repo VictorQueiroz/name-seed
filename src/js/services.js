@@ -6,18 +6,34 @@ angular.module('App/Services', [
 
 .value('version', '0.0.1')
 
-.factory('$io', ['$window', '$q', function($window, $q){
-	var io = function () {
+.factory('$io', ['$q', '$timeout', '$window', function($q, $timeout, $window){
+	var promise = function () {
 		var deferred = $q.defer();
-		deferred.resolve($window.io);
+
+		$timeout(function () {
+			deferred.resolve($window.io);
+		});
+
 		return deferred.promise;
 	};
 
 	return {
-		socket: io().then(function(io) {
+		socket: promise().then(function (io) {
 			var socket = io.connect();
 
 			return socket;
 		})
 	};
+}])
+
+.factory('$moment', ['$q', '$timeout', '$window', function($q, $timeout, $window){
+	return (function () {
+		var deferred = $q.defer();
+
+		$timeout(function () {
+			deferred.resolve($window.moment);
+		});
+
+		return deferred.promise;
+	})();
 }]);

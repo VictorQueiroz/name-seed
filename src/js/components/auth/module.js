@@ -7,6 +7,10 @@ angular.module('Auth', [
 ])
 
 .run(['$rootScope', '$route', '$location', 'Session', function($rootScope, $route, $location, Session) {
+	$rootScope.$on('session:logout', function () {
+		Session.destroy();
+	});
+
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
 		var params = next.$$route;
 
@@ -41,6 +45,7 @@ angular.module('Auth', [
 			});
 		}
 
+		// ngRoute bug
 		// event.preventDefault();
 	});
 }]);

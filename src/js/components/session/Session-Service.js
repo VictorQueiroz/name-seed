@@ -4,7 +4,7 @@ angular.module('Session/Service', [
 	'ngCookies'
 ])
 
-.factory('Session', ['$http', '$cookieStore', function ($http, $cookieStore) {
+.factory('Session', ['$http', '$window', function ($http, $window) {
 	var res = $http.get('/auth/check');
 
 	return {
@@ -20,6 +20,10 @@ angular.module('Session/Service', [
 				return res.data.user;
 			else
 				return {result: false};
-		})
+		}),
+
+		destroy: function () {
+			$window.location.href = '/auth/destroy';
+		}
 	};
 }]);

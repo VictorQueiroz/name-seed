@@ -5,7 +5,7 @@ angular.module('Post/Ctrl/PostList', [
 	'App/Services'
 ])
 
-.controller('PostListCtrl', ['$scope', '$io', 'Post', function ($scope, $io, Post) {
+.controller('PostListCtrl', ['$scope', '$io', '$moment', 'Post', function ($scope, $io, $moment, Post) {
 	$scope.$watch('paginator.perPage', function(perPage) {
 		$scope.$broadcast('posts paginator reload');
 	});
@@ -18,9 +18,17 @@ angular.module('Post/Ctrl/PostList', [
 			page: page,
 			per_page: paginator.perPage
 		}).$promise.then(function(pag) {
-			$scope.posts = pag.data;
+			$moment.then(function(moment) {
+				$scope.posts = pag.data;
+
+				Object.keys($scope.posts).forEach(function (key) {
+					var post = $scope.posts[key];
+
+					post.created_at = moment(post.created_at).fromNow();
+				});
+			});
+
 			angular.extend(paginator, pag);
-			// paginator.perPage = $scope.posts.length;
 		});
 	});
 

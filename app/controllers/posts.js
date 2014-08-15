@@ -13,26 +13,32 @@ exports.list = function (req, res) {
 	query.page = parseInt(query.page ? query.page : 1);
 	query.per_page = query.per_page ? query.per_page : 4;
 
-	var offset = (query.page * query.per_page) - 1,
+	var offset = (query.page - 1) * (query.per_page),
 	limit = parseInt(query.per_page);
 
 	Post
-		.findAndCountAll({
-			limit: limit,
-			offset: offset,
-			order: 'updated_at DESC'
+		.count()
+		.success(function (count) {
+
+			Post
+				.findAndCountAll({
+					limit: limit,
+					offset: offset,
+					order: 'updated_at DESC'
+				})
+
+				.success(function(result) {
+					var posts = result.rows;
+
+					res.json({
+						current: query.page,
+						pageCount: Math.ceil((count / limit - 1) + 1),
+						count: count,
+						data: posts
+					});			
+				});
+
 		})
-
-		.success(function(result) {
-			var posts = result.rows;
-			var count = result.count;
-
-			res.json({
-				current: query.page,
-				pageCount: Math.ceil(count / limit - 1),
-				data: posts
-			});
-		});
 };
 
 exports.get = function (req, res) {

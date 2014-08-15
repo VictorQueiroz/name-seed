@@ -19,5 +19,11 @@ angular.module('User/Routes', [
 		.when('/profile', {
 			templateUrl: 'users/profile.tpl.html',
 			controller: 'ProfileCtrl'
+		})
+
+		.when('/auth/destroy', {
+			controller: function ($window) {
+				$window.location.href = '/auth/destroy';
+			}
 		});
 }]);

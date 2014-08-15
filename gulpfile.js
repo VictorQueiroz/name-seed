@@ -37,6 +37,19 @@ gulp.task('stylesheets', ['clean'], function () {
 		.pipe(rename({
 			basename: 'style', suffix: '.min'
 		}))
+		// .pipe(uncss({
+		// 	html: [
+		// 		'app/views/index.ejs',
+
+		// 		'src/partials/posts/create.tpl.html',
+		// 		'src/partials/posts/show.tpl.html',
+		// 		'src/partials/posts/list.tpl.html',
+
+		// 		'src/partials/about-us.tpl.html',
+		// 		'src/partials/authentication.tpl.html',
+		// 		'src/partials/index.tpl.html',
+		// 	]
+		// }))
 		.pipe(gulp.dest(paths.public + '/css'));
 });
 
