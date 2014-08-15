@@ -16,28 +16,23 @@ exports.list = function (req, res) {
 	limit = parseInt(query.per_page);
 
 	User
-		.count()
-		.success(function (count) {
-
-			User
-				.findAndCountAll({
-					limit: limit,
-					offset: offset,
-					order: 'updated_at DESC'
-				})
-
-				.success(function(result) {
-					var users = result.rows;
-
-					res.json({
-						current: query.page,
-						pageCount: Math.ceil((count / limit - 1) + 1),
-						count: count,
-						data: users
-					});			
-				});
-
+		.findAndCountAll({
+			limit: limit,
+			offset: offset,
+			order: 'updated_at DESC'
 		})
+
+		.success(function(result) {
+			var users = result.rows;
+			var count = result.count;
+
+			res.json({
+				current: query.page,
+				pageCount: Math.ceil((count / limit - 1) + 1),
+				count: count,
+				data: users
+			});			
+		});
 };
 
 exports.get = function (req, res) {

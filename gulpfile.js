@@ -81,7 +81,7 @@ gulp.task('partials', ['clean'], function () {
 		.pipe(gulp.dest(paths.public + '/js'));
 });
 
-gulp.task('server', function () {
+gulp.task('server', ['clean'], function () {
 	nodemon({
 		script: 'server.js'
 	})
@@ -91,7 +91,7 @@ gulp.task('server', function () {
 	});
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', ['clean'], function () {
 	gulp
 		.watch(paths.stylesheets, ['stylesheets'])
 		.on('change', livereload.changed);

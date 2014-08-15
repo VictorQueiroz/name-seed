@@ -17,28 +17,23 @@ exports.list = function (req, res) {
 	limit = parseInt(query.per_page);
 
 	Post
-		.count()
-		.success(function (count) {
-
-			Post
-				.findAndCountAll({
-					limit: limit,
-					offset: offset,
-					order: 'updated_at DESC'
-				})
-
-				.success(function(result) {
-					var posts = result.rows;
-
-					res.json({
-						current: query.page,
-						pageCount: Math.ceil((count / limit - 1) + 1),
-						count: count,
-						data: posts
-					});			
-				});
-
+		.findAndCountAll({
+			limit: limit,
+			offset: offset,
+			order: 'updated_at DESC'
 		})
+
+		.success(function(result) {
+			var posts = result.rows;
+			var count = result.count;
+
+			res.json({
+				current: query.page,
+				pageCount: Math.ceil((count / limit - 1) + 1),
+				count: count,
+				data: posts
+			});			
+		});
 };
 
 exports.get = function (req, res) {
