@@ -2,5 +2,7 @@
   "curly": true,
   "eqnull": true,
   "eqeqeq": true,
-  "undef": true
+  "undef": true,
+  "unused": true,
+  "predef": ["console", "angular", "document"]
 }

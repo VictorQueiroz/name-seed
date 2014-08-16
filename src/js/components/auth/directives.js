@@ -1,6 +1,8 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('Auth/Directives', [
-	'Auth/Directive/IfAuthenticated',
-	'Auth/Directive/IfGuest'
-]);
+	angular.module('Auth/Directives', [
+		'Auth/Directive/IfAuthenticated',
+		'Auth/Directive/IfGuest'
+	]);
+})();

@@ -1,11 +1,13 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('Post/Ctrl/PostDetail', [
-	'ngRoute',
+	angular.module('Post/Ctrl/PostDetail', [
+		'ngRoute',
 
-	'Post/Service'
-])
+		'Post/Service'
+	])
 
-.controller('PostDetailCtrl', ['$scope', '$routeParams', 'Post', function ($scope, $routeParams, Post) {
-	var post = $scope.post = Post.get({ id: $routeParams.id });
-}]);
+	.controller('PostDetailCtrl', ['$scope', '$routeParams', 'Post', function ($scope, $routeParams, Post) {
+		var post = $scope.post = Post.get({ id: $routeParams.id });
+	}]);
+})();

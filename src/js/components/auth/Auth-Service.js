@@ -1,7 +1,9 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('Auth/Service', [
-	'ngCookies',
+	angular.module('Auth/Service', [
+		'ngCookies',
 
-	'Session'
-]);
+		'Session'
+	]);
+})();

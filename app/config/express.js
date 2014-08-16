@@ -54,12 +54,12 @@ module.exports = function (sequelize) {
 
 	// Passport required options
 	app.use(session({
-		maxAge: new Date(Date.now() + 3600000),
+		// maxAge: new Date(Date.now() + 3600000),
 		secret: 'something here',
 		saveUninitialized: true,
 		resave: true,
-		proxy: true,
-		secureProxy: true,
+		// proxy: true,
+		// secureProxy: true,
 		store: new SequelizeStore({
 			db: sequelize
 		})

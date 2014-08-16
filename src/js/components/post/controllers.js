@@ -1,7 +1,9 @@
-'use strict';
+(function () {
+	'use strict';
 
-angular.module('Post/Controllers', [	
-	'Post/Ctrl/PostList',
-	'Post/Ctrl/PostDetail',
-	'Post/Ctrl/PostCreate'
-]);
+	angular.module('Post/Controllers', [	
+		'Post/Ctrl/PostList',
+		'Post/Ctrl/PostDetail',
+		'Post/Ctrl/PostCreate'
+	]);
+})();
