@@ -2,28 +2,37 @@
 
 module.exports = function (sequelize, DataTypes) {
 	var User = sequelize.define('User', {
-		name: DataTypes.STRING (100),
-		username: DataTypes.STRING (16),
+		name: {
+			type: DataTypes.STRING (100),
+		},
+
+		username: {
+			type: DataTypes.STRING (16),
+		},
+
 		email: {
-			type: DataTypes.STRING,
+			type: DataTypes.STRING(255),
 			isEmail: true
 		},
-		password: DataTypes.STRING,
+
+		password: {
+			type: DataTypes.STRING(255)
+		},
 
 		fb_id: { // Facebook
-			type: DataTypes.STRING
+			type: DataTypes.STRING(255)
 		},
 
 		go_id: { // Google
-			type: DataTypes.STRING
+			type: DataTypes.STRING(255)
 		},
 
 		tw_id: { // Twitter
-			type: DataTypes.STRING
+			type: DataTypes.STRING(255)
 		},
 
 		gh_id: { // Github
-			type: DataTypes.STRING
+			type: DataTypes.STRING(255)
 		}
 	}, {
     freezeTableName: true,
@@ -36,12 +45,19 @@ module.exports = function (sequelize, DataTypes) {
       	var Role = models.Role;
 
 				Post.belongsTo(User);
-				Role.hasMany(User);
 
 				User.hasMany(Post);
-				User.hasMany(Role);
+
+				Role.hasMany(User, {
+					through: 'user_roles'
+				});
+
+				User.hasMany(Role, {
+					through: 'user_roles'
+				});
       }
-   	}
+   	},
+   	tableName: 'users'
 	});
 
 	return User;

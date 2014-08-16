@@ -1,26 +1,44 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<form ng-submit="updatePost(post)" class="form-horizontal" role="form">
+			<form ng-submit="updatePost(post)" role="form">
+				<h3>Post (Id: {{post.id}})</h3>
+
 				<div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Title</label>
-					<div class="col-sm-10">
-						<input ng-model="post.title" name="title" type="text" class="form-control">
-					</div>
+					<label for="title">Title</label>
+					<input ng-model="post.title" name="title" type="text" class="form-control">
 				</div>
 
 				<div class="form-group">
-					<label for="body" class="col-sm-2 control-label">Body</label>
-					<div class="col-sm-10">
-						<textarea ng-model="post.body" name="body" class="form-control"></textarea>
-					</div>
+					<label for="created_at">Created at</label>
+					<input ng-model="post.created_at" disabled name="created_at" type="text" class="form-control">
 				</div>
 
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button class="btn btn-default" type="submit">Save</button>
-					</div>
+					<label for="updated_at">Updated at</label>
+					<input ng-model="post.updated_at" disabled name="updated_at" type="text" class="form-control">
+				</div>
+
+				<div class="form-group">
+					<label for="body">Body</label>
+					<textarea ng-model="post.body" name="body" class="form-control"></textarea>
+				</div>
+
+				<h3>Author (Id: {{post.user.id}})</h3>
+
+				<div class="form-group">
+					<label>Name</label>
+					<input ng-model="post.user.name" disabled type="text" class="form-control">
+				</div>
+
+				<div class="form-group">
+					<label>E-mail</label>
+					<input ng-model="post.user.email" disabled type="text" class="form-control">
 				</div>				
+
+				<div class="form-group">
+					<button class="btn btn-default" type="submit">Save</button>
+				</div>
 			</form>
 		</div>
 	</div>

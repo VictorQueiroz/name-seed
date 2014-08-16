@@ -13,7 +13,9 @@ module.exports = function (app, io) {
 		  require('./'+file.replace('.js', ''))(app, io);
 		});
 
-	app.route('*').get(function(req, res) {
-  	res.render('index', { _csrf: req.csrfToken() });
-  });
+	app
+		.route('*')
+		.get(function(req, res) {
+	  	res.render('index', { _csrf: req.csrfToken() });
+	  });
 };

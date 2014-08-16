@@ -5,7 +5,26 @@ Post = models.Post,
 User = models.User,
 passport = require('passport'),
 pagination = require('pagination'),
+faker = require('faker'),
 _ = require('underscore-node');
+
+exports.seed = function (req, res) {
+	var posts = [];
+
+	for (var i = 0; i < 800; i++) {
+		posts.push({
+			title: faker.Lorem.sentences(8),
+			user_id: 1,
+			body: faker.Lorem.sentences(300)
+		});
+	};
+
+	Post
+		.bulkCreate(posts)
+		.success(function (posts) {
+			res.json(posts);
+		});
+};
 
 exports.list = function (req, res) {
 	var query = req.query;
@@ -74,9 +93,13 @@ exports.store = function (req, res) {
 exports.update = function (req, res) {
 	var id = req.params.id;
 	var data = _.pick(req.body, 'title', 'body');
+	var where = {
+		id: id,
+		user_id: req.user.id
+	};
 
 	Post
-		.update(data, { id: id })
+		.update(data, where)
 		.success(function() {
 			Post
 				.find({	id: id })

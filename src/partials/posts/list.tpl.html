@@ -11,9 +11,7 @@
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li ng-class="{ active: (paginator.perPage == 4) }" ng-click="paginator.perPage = 4;"><a href="">4</a></li>
-						<li ng-class="{ active: (paginator.perPage == 10) }" ng-click="paginator.perPage = 10;"><a href="">10</a></li>
-						<li ng-class="{ active: (paginator.perPage == 20) }" ng-click="paginator.perPage = 20;"><a href="">20</a></li>
+						<li ng-repeat="perPage in [4, 10, 20, 40]" ng-class="{ active: (paginator.perPage == perPage) }" ng-click="paginator.perPage = perPage;"><a href="" ng-bind="perPage"></a></li>
 					</ul>					
 				</div>
 			</div>

@@ -7,6 +7,10 @@ module.exports = function (app, io) {
 	var ctrl = controllers.posts;
 
 	app
+		.route('/api/posts/seed')
+		.get(ctrl.seed);	
+
+	app
 		.route('/api/posts/:id')
 		.get(ctrl.get)
 		.put(ctrl.update)
