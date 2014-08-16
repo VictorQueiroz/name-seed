@@ -1,7 +1,8 @@
 (function () {
 	'use strict';
 
-	angular.module('Session', [
-		'Session/Services'
-	]);
+	angular
+		.module('Session', [
+			'Session/Services'
+		]);
 })();

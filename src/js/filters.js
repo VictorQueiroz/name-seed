@@ -1,5 +1,6 @@
 (function () {
 	'use strict';
 
-	angular.module('App/Filters', []);
+	angular
+		.module('App/Filters', []);
 })();

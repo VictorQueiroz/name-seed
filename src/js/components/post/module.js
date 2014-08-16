@@ -1,8 +1,9 @@
 (function () {
 	'use strict';
 
-	angular.module('Post', [
-		'Post/Controllers',
-		'Post/Services'
-	]);
+	angular
+		.module('Post', [
+			'Post/Controllers',
+			'Post/Services'
+		]);
 })();

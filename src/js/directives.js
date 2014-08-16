@@ -1,7 +1,8 @@
 (function () {
 	'use strict';
 
-	angular.module('App/Directives', [
-		'Auth/Directives'
-	]);
+	angular
+		.module('App/Directives', [
+			'Auth/Directives'
+		]);
 })();
