@@ -2,7 +2,8 @@
 
 var controllers = require('../controllers'),
 passport = require('passport'),
-filters = require('./filters');
+filters = require('./filters'),
+_ = require('underscore-node');
 
 module.exports = function (app) {
 	var ctrl = controllers.users;
@@ -29,7 +30,7 @@ module.exports = function (app) {
 
 	app.route('/auth/check').get(filters.authenticated, function(req, res, next) {
 		if(req.isAuthenticated())
-			res.json({result: true, user: req.user});
+			res.json({result: true, user: _.pick(req.user, 'email', 'name', 'username')});
 		else 
 			res.json({result: false});
 	});
