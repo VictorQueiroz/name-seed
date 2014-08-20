@@ -30,7 +30,9 @@ exports.list = function (req, res) {
 				current: query.page,
 				pageCount: Math.ceil((count / limit - 1) + 1),
 				count: count,
-				data: users
+				data: _.filter(users, function (user) {
+					return _.pick(user, 'name', 'username', 'email');
+				})
 			});			
 		});
 };
