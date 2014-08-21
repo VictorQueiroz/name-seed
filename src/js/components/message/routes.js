@@ -11,6 +11,11 @@
 				.when('/messages', {
 					templateUrl: 'messages/list.tpl.html',
 					controller: 'MessageListCtrl'
-				});
+				})
+
+				.when('/messages/:username', {
+					templateUrl: 'messages/show.tpl.html',
+					controller: 'MessageDetailCtrl'
+				});				
 		}]);
 })();

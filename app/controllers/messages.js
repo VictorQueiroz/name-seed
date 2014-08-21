@@ -73,7 +73,7 @@ exports.list = function (req, res) {
 		.findAndCountAll({
 			limit: limit,
 			offset: offset,
-			order: 'updated_at DESC',
+			order: 'receiver_id DESC',
       include: [
       	{ model: User, as: 'Author' },
       	{ model: User, as: 'Receiver' }
@@ -87,8 +87,8 @@ exports.list = function (req, res) {
 		})
 
 		.success(function(result) {
-			var messages = result.rows;
-			var count = result.count;
+			var messages = result.rows,
+			count = result.count;
 
 			res.json({
 				current: query.page,
