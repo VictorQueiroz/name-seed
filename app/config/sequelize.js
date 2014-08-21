@@ -5,8 +5,8 @@ options = require('./config').database;
 
 var sequelize = new Sequelize(options.database, options.user, options.password, {
 	host: options.host,
-	dialect: 'mysql',
-  logging: console.log,
+	dialect: options.dialect,
+  logging: options.logging,
 });
 
 sequelize

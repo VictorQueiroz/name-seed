@@ -5,8 +5,12 @@ User = models.User,
 Post = models.Post;
 
 module.exports = function (io) {
+	io.on('disconnect', function (socket) {
+		socket.broadcast.emit('user disconnected');
+	});
+
 	io.on('connection', function (socket) {
-		console.log('A user connected!');
+		socket.broadcast.emit('user connected');
 
 		socket.on('user authenticated', function(user){
 			socket.emit('user authenticated', user);

@@ -7,7 +7,7 @@
 			'App/Services'
 		])
 
-		.controller('PostListCtrl', ['$scope', '$location', '$io', '$moment', 'Post', function ($scope, $location, $io, $moment, Post) {
+		.controller('PostListCtrl', ['$scope', '$location', '$socket', '$moment', 'Post', function ($scope, $location, $socket, $moment, Post) {
 			$scope.$watch('paginator.perPage', function(perPage) {
 				$scope.$broadcast('posts paginator reload');
 			});
@@ -21,7 +21,7 @@
 					page: page,
 					per_page: paginator.perPage
 				}).$promise.then(function(pag) {
-					$moment.then(function(moment) {
+					$moment().then(function(moment) {
 						$scope.posts = pag.data;
 
 						Object.keys($scope.posts).forEach(function (key) {
@@ -35,8 +35,10 @@
 				});
 			});
 
-			$io.socket.then(function(socket) {
+			$socket().then(function(socket) {
 				socket.on('post new', function(post) {
+					console.log(post);
+					
 					$scope.$broadcast('posts paginator reload');
 				});
 			});

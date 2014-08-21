@@ -52,6 +52,7 @@ gulp.task('scripts', ['clean'], function () {
 			}))
 			.pipe(uglify({
 				compress: {
+					drop_console:true,
 					unsafe: false
 				},
 				preserveComments: function () {
@@ -59,7 +60,7 @@ gulp.task('scripts', ['clean'], function () {
 				},
 				output: {
 					semicolons: false,
-					comments: false,
+					comments: false
 				}
 			}))
 			.pipe(concat('base.min.js'))

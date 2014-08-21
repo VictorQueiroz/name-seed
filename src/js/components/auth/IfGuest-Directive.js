@@ -8,7 +8,7 @@
 	.directive('ifGuest', ['Session', function(Session) {
 		return {
 			link: function($scope, $element) {
-				Session.isAuthenticated.then(function(res) {
+				Session.isAuthenticated().then(function(res) {
 					if(res.result) {
 						$element.remove();
 					}

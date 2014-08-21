@@ -4,6 +4,7 @@
 	angular
 		.module('App/Controllers', [
 			'User/Controllers',
-			'Post/Controllers'
+			'Post/Controllers',
+			'Message/Controllers'
 		]);
 })();

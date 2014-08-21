@@ -7,7 +7,7 @@
 		])
 
 		.controller('ProfileCtrl', ['$scope', 'Session', function ($scope, Session) {
-			Session.getUser.then(function(user) {
+			Session.getUser().then(function(user) {
 				$scope.user = user;
 			});
 		}]);

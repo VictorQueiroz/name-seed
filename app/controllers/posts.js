@@ -4,7 +4,6 @@ var models = require('../models'),
 Post = models.Post,
 User = models.User,
 passport = require('passport'),
-pagination = require('pagination'),
 faker = require('faker'),
 _ = require('underscore-node');
 

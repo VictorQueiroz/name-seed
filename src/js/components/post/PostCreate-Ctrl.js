@@ -8,18 +8,19 @@
 			'Post/Service'
 		])
 
-		.controller('PostCreateCtrl', ['$scope', '$location', '$io', 'Post', function ($scope, $location, $io, Post) {
-			$scope.storePost = function (post) {
-				post = new Post(post);
+		.controller('PostCreateCtrl', ['$scope', '$location', '$socket', 'Post', function ($scope, $location, $socket, Post) {
+			$scope.post = new Post();
 
+			$scope.storePost = function (post) {
 				post
 					.$save()
 					.then(function(post) {
 						if(post) {
-							$io.socket.then(function(socket) {
+							$socket().then(function(socket) {
 								socket.emit('post new', post.id);
 							});
-							$location.path('/posts/' + (post.id ? post.id : ''))
+							
+							$location.path('/posts/' + (post.id ? post.id : ''));
 						}
 					});
 			};

@@ -11,7 +11,9 @@ require('./app/config/passport')();
 
 controllers['socket.io'](io);
 
-db.sequelize.sync().complete(function(err){
+db.sequelize.sync({
+	force: false
+}).complete(function(err){
 	if(err)
 		throw err[0];
 	else

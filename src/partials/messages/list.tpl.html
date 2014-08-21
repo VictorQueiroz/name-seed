@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2">
+		</div>
+		<div class="col-lg-8">
+			<table class="table">
+				<tbody ng-repeat="message in messages">
+					<tr>
+						<td>{{ message.author.name }}: {{ message.content }}</td>
+					</tr>
+				</tbody>
+			</table>
+			
+<!-- 			<form ng-submit="sendMessage(message)">
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="message.content">
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-default">
+				</div>
+			</form> -->
+		</div>
+	</div>
+</div>

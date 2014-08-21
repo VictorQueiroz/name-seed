@@ -26,13 +26,19 @@
 
 		.config(['$httpProvider', '_CSRF', function ($httpProvider, _CSRF) {
 			$httpProvider.defaults.headers.common = {
-				'x-csrf-token': _CSRF
+				'X-CSRF-Token': _CSRF
 			};
 		}])
 
-		.run(['$io', function($io) {
-			$io.socket.then(function(socket) {
-				//
+		.run(['$socket', function($socket) {
+			$socket().then(function(socket) {
+				socket.on('user connected', function () {
+					console.log('New user connected!');
+				});
+
+				socket.on('user disconnected', function () {
+					console.log('User disconnected!');
+				});
 			});
 		}]);
 })();

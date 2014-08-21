@@ -9,8 +9,8 @@
 		'Auth/Controllers'
 	])
 
-	.run(['$rootScope', '$route', '$location', '$io', 'Session', function($rootScope, $route, $location, $io, Session) {
-		$io.socket.then(function(socket) {
+	.run(['$rootScope', '$route', '$location', '$socket', 'Session', function($rootScope, $route, $location, $socket, Session) {
+		$socket().then(function(socket) {
 			socket.on('user authenticated', function(user) {
 				console.log('Congratulations, '+user.username+', you\'re logged!');
 			});
@@ -39,7 +39,7 @@
 				console.log('This route are reserved for guests!');
 				console.log('Checking if you are a guest...');
 
-				isAuthenticated.then(function(res) {
+				isAuthenticated().then(function(res) {
 					if(res.result) {
 						console.log('You are not a guest.');
 						console.log('You can not access this area.');
@@ -51,7 +51,7 @@
 			} else if (params.authenticated) { // Only authenticated users will can go in.
 				console.log('This route are reserved for authenticated users!');
 				console.log('Checking if you are authenticated...');
-				isAuthenticated.then(function(res) {
+				isAuthenticated().then(function(res) {
 					if(!res.result) {
 						console.log('You are not authenticated.');
 						console.log('You can not access this area.');

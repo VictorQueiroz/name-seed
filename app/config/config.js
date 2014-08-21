@@ -4,5 +4,7 @@ exports.database = {
 	host: 'localhost',
 	user: 'root',
 	password: null,
-	database: 'name_seed'
+	database: 'name_seed',
+	logging: false,
+	dialect: 'mysql'
 };

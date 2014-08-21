@@ -2,9 +2,5 @@
 	'use strict';
 
 	angular
-		.module('User/Services', [
-			'ngResource',
-
-			'User/Service'
-		]);
+		.module('User/Services', []);
 })();

@@ -3,11 +3,10 @@
 
 	angular
 		.module('App/Routes', [
-			'ngRoute',
-
 			'User/Routes',
 			'Post/Routes',
-			'Auth/Routes'
+			'Auth/Routes',
+			'Message/Routes'
 		])
 
 		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {

@@ -5,12 +5,12 @@
 		'App/Services'
 	])
 
-	.controller('AuthCtrl', ['$scope', '$http', '$io', '$location', '$window', function ($scope, $http, $io, $location, $window) {
+	.controller('AuthCtrl', ['$scope', '$http', '$socket', '$location', '$window', function ($scope, $http, $socket, $location, $window) {
 		$scope.authenticate = function (credentials) {
 			$http.post('/auth/local', credentials).then(function(res) {
 				var user = res.data;
 
-				$io.socket.then(function(socket) {
+				$socket().then(function(socket) {
 					if(!res.data.result) {
 						socket.emit('user unauthorized', {});
 					}
