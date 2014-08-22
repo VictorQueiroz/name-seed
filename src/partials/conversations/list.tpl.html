@@ -1,0 +1,17 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2">
+		</div>
+		<div class="col-lg-8">
+			<table class="table">
+				<tbody ng-repeat="conversation in conversations">
+					<tr>
+						<td><a href="/conversations/{{ conversation.id }}" ng-bind="conversation.title"></a></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<vq-pager data-paginator="paginator" data-current-key="'current'" data-last-key="'pageCount'" data-event-name="'conversations'"></vq-pager>
+		</div>
+	</div>
+</div>
