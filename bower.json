@@ -31,6 +31,7 @@
     "moment": "~2.8.1"
   },
   "devDependencies": {
-    "faker": "~0.0.2"
+    "faker": "~0.0.2",
+    "angular-mocks": "~1.2.23"
   }
 }
