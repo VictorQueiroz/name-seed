@@ -30,14 +30,18 @@
 			};
 		}])
 
-		.run(['$socket', function($socket) {
+		.run(['$rootScope', '$socket', function($rootScope, $socket) {
 			$socket().then(function(socket) {
 				socket.on('user connected', function () {
 					console.log('New user connected!');
 				});
 
 				socket.on('user disconnected', function () {
-					console.log('User disconnected!');
+					console.log('A user disconnected!');
+					$rootScope.$broadcast('user disconnected');
+				});
+
+				$rootScope.$on('user disconnected', function () {
 				});
 			});
 		}]);

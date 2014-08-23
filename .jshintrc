@@ -3,6 +3,7 @@
   "eqnull": true,
   "eqeqeq": true,
   "undef": true,
-  "unused": true,
-  "predef": ["console", "angular", "document"]
+  "unused": false,
+  "predef": ["console", "angular", "document"],
+  "es3": true
 }

@@ -52,7 +52,7 @@ gulp.task('scripts', ['clean'], function () {
 			}))
 			.pipe(uglify({
 				compress: {
-					drop_console:true,
+					drop_console: false,
 					unsafe: false
 				},
 				preserveComments: function () {
@@ -81,6 +81,9 @@ gulp.task('partials', ['clean'], function () {
 });
 
 gulp.task('server', ['clean'], function () {
+	// require('./server');
+
+	// very slow for development
 	nodemon({
 		script: 'server.js'
 	})

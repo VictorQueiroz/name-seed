@@ -1,7 +1,5 @@
 'use strict';
 
-var faker = require('faker');
-
 module.exports = function (sequelize, DataTypes) {
 	var Message = sequelize.define('Message', {
 		content: DataTypes.TEXT
@@ -12,24 +10,24 @@ module.exports = function (sequelize, DataTypes) {
     underscored: true,
     classMethods: {
       associate: function(models) {
-        var User = models.User;
-
-        Message.belongsTo(User, {
-          as: 'Receiver',
-          foreignKey: 'receiver_id'
-        });
+        var User = models.User,
+        Conversation = models.Conversation;
 
         Message.belongsTo(User, {
           as: 'Author',
           foreignKey: 'author_id'
         });        
 
-        User.hasMany(Message, { 
-          foreignKey: 'author_id'
-        });        
+        Message.hasMany(Conversation, {
+          as: 'Conversation',
+          foreignKey: 'conversation_id',
+          through: 'conversation_messages'
+        });       
 
-        User.hasMany(Message, { 
-          foreignKey: 'receiver_id'
+        Conversation.hasMany(Message, {
+          as: 'Messages',
+          foreignKey: 'message_id',
+          through: 'conversation_messages'
         });
       }
    	},

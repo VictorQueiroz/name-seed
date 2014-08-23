@@ -7,6 +7,8 @@ io = require('socket.io')(server),
 controllers = require('./app/controllers'),
 db = require('./app/models');
 
+io.set('log level', 3);
+
 require('./app/config/passport')();
 
 controllers['socket.io'](io);
@@ -14,10 +16,11 @@ controllers['socket.io'](io);
 db.sequelize.sync({
 	force: false
 }).complete(function(err){
-	if(err)
+	if(err) {
 		throw err[0];
-	else
+	} else {
 		server.listen(app.get('port'));
+	};
 });
 
 /**

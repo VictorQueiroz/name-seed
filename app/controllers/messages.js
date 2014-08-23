@@ -1,63 +1,63 @@
 'use strict';
 
 var Sequelize = require('sequelize'),
-models = require('../models'),
-Message = models.Message,
-User = models.User,
 passport = require('passport'),
 faker = require('faker'),
 _ = require('underscore-node');
 
+var models = require('../models'),
+Message = models.Message,
+User = models.User,
+Conversation = models.Conversation;
+
 exports.seed = function (req, res) {
-	var User = models.User,
-	Message = models.Message;
+  for(var i=0; i<10; i++) {
+  	User
+		  .create({
+		    name: faker.Name.findName(),
+		    email: faker.Internet.email(),
+		    password: '123456789',
+		    username: faker.Internet.userName()
+		  })
 
-  User
-	  .create({
-	    name: faker.Name.findName(),
-	    email: faker.Internet.email(),
-	    password: '123456789',
-	    username: faker.Internet.userName()
-	  })
-	  .success(function (author) {
-	    User
-		    .create({
-		      name: faker.Name.findName(),
-		      email: faker.Internet.email(),
-		      password: '123456789',
-		      username: faker.Internet.userName()
-		    })
-		    .success(function (receiver) {
-		      Message
-			      .create({
-			        content: faker.Lorem.sentences(30)
-			      })
-			      .success(function (message) {
-			        message
-			        	.setAuthor(author)
-			        	.success(function (message) {
-				        	message
-				        		.setReceiver(receiver)
-				        		.success(function (message) {
-							        Message
-								        .find({
-								        	where: {
-								        		id: message.id
-								        	},
+		  .success(function (user) {
+			  Conversation
+			  	.create({
+			  		title: faker.Lorem.sentences(3)
+			  	})
 
-								        	include: [
-								        		{ model: User, as: 'Author' },
-								        		{ model: User, as: 'Receiver' }
-								        	]
-								        })
-								        .success(function (message) {
-								        	res.json(message)
-								        });
-					        	});
-				        });
-			      });
-		    });
-	  });			
+			  	.success(function (conversation) {
+				  		Message
+				  			.create({
+				  				content: faker.Lorem.sentences(5)
+				  			})
+
+				  			.success(function (message) {
+				  				conversation.addMember(user).success(function () {
+					  				conversation.addMessage(message).success(function (conversation) {
+						  				message.setAuthor(user).success(function (message) {
+						  					Conversation.find({
+						  						where: {
+						  							id: conversation.id
+						  						},
+
+						  						include: [
+						  							{ model: User, as: 'Members' },
+						  							{ model: Message, as: 'Messages', include: [
+						  									{ model: User, as: 'Author', attributes: ['name', 'id'] }
+							  							]
+							  						}
+						  						]
+						  					}).success(function (conversation) {
+						  						res.json(conversation);
+						  					});
+						  				})
+					  				})
+				  				})
+				  			});			  			
+			  	});
+		  });			
+	}
 };
 
 exports.list = function (req, res) {
@@ -73,17 +73,10 @@ exports.list = function (req, res) {
 		.findAndCountAll({
 			limit: limit,
 			offset: offset,
-			order: 'receiver_id DESC',
+			order: 'created_at',
       include: [
-      	{ model: User, as: 'Author' },
-      	{ model: User, as: 'Receiver' }
+      	{ model: User, as: 'Author' }
       ],
-      where: Sequelize.and(
-      	{ author_id: req.user.id },
-      	Sequelize.or(
-      		{ receiver_id: req.user.id }
-      	)      	
-      )
 		})
 
 		.success(function(result) {
@@ -102,78 +95,85 @@ exports.list = function (req, res) {
 exports.get = function (req, res) {
 	var id = req.params.id;
 
-	Message
+	User
 		.find({
 			where: {
 				id: id
-			},
-
-			include: [{
-				model: User
-			}]
+			}
 		})
-		.success(function(message) {
-			if(message)
-				res.json(message);
-		});
+
+		.success(function (user) {
+			Message
+				.find({
+					where: {
+						id: user.id
+					},
+
+		      include: [
+		      	{ model: User, as: 'Author' },
+		      	{ model: Conversation, as: 'Conversation' },
+		      ],
+				})
+				.success(function(message) {
+					if(message) {
+						res.json(message);
+					}
+				});			
+		})
 };
 
 exports.store = function (req, res) {
 	var data = _.pick(req.body,
 		'content',
-		'receiver_id'
+		'conversation_id'
 	);
 
-	data.author_id = req.user.id;
+	if(!data.conversation_id) {
+		res.json ({ result: false });
+	}
 
-	// Finding author.
-	User
+	var author_id = req.user.id;
+
+	Conversation
 		.find({
 			where: {
-				id: data.author_id
-			}
+				id: data.conversation_id
+			},
 		})
 
-		.success(function (author) {
-			// Finding receiver.
-			User
-				.find({
-					where: {
-						id: data.receiver_id
-					}
-				})
+		.success(function (conversation) {
+			Message
+				.create(_.pick(req.body, 'content'))
+				.success(function (message) {
+					User
+						.find({
+							where: {
+								id: author_id
+							}
+						})
 
-				.success(function (receiver) {
-					Message
-						.create(data)
-						.success(function(message) {
-							// Set author user.
-							message
-								.setAuthor(author)
-								.success(function (message) {
-									// Set receiver user.
-									message
-										.setReceiver(receiver)
+						.success(function (user) {
+							message.setAuthor(user).success(function () {
+								conversation.addMessage(message).success(function () {
+									Message
+										.find({
+											where: {
+												id: message.id
+											},
+
+											include: [
+												{ model: User, as: 'Author' }
+											]
+										})
+
 										.success(function (message) {
-											// Return message.
-											Message
-												.find({
-													where: {
-														id: message.id
-													},
-
-													include: [
-														{ model: User, as: 'Receiver' }
-													]
-												})
-												.success(function (message) {
-													res.json(message);
-												});
+											res.json(message);
 										});
 								});
-						});					
-				})
-		})
+							});
+						});
+				});
+		});
 };
 
 exports.update = function (req, res) {

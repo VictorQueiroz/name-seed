@@ -2,8 +2,9 @@
 	'use strict';
 
 	angular
-		.module('Message', [
-			'Message/Controllers',
-			'Message/Services'
+		.module('Conversation', [
+			'Conversation/Controllers',
+			'Conversation/Services',
+			'Conversation/Directives'
 		]);
 })();

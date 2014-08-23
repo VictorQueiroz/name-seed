@@ -39,7 +39,7 @@ module.exports = function (sequelize) {
 	app.enable('jsonp callback');
 
 	app.use(cors());
-	app.use(favicon(path.join(__dirname, '../../public/favicon.ico')));
+	app.use(favicon(path.join(__dirname, '../..', 'public', 'favicon.ico')));
 
 	app.use(responseTime());
 

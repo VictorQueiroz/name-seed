@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
 		},
 
 		username: {
-			type: DataTypes.STRING (16),
+			type: DataTypes.STRING (20),
 		},
 
 		email: {

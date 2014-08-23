@@ -2,7 +2,8 @@
 	'use strict';
 
 	angular
-		.module('Message/Controllers', [
-			'Message/Ctrl/MessageList'
+		.module('Conversation/Controllers', [
+			'Conversation/Ctrl/ConversationList',
+			'Conversation/Ctrl/ConversationDetail'
 		]);
 })();

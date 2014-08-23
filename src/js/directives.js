@@ -3,6 +3,7 @@
 
 	angular
 		.module('App/Directives', [
-			'Auth/Directives'
+			'Auth/Directives',
+			'Conversation/Directives'
 		]);
 })();

@@ -2,23 +2,23 @@
 	'use strict';
 
 	angular
-		.module('Message/Ctrl/MessageList', [
-			'Message/Service'
+		.module('Conversation/Ctrl/ConversationList', [
+			'Conversation/Service'
 		])
 
-		.controller('MessageListCtrl', ['$scope', '$socket', 'Message', function ($scope, $socket, Message) {
-			$scope.$on('messages page changed', function (event, page, paginator) {
-				if(!paginator.perPage < 1) {
+		.controller('ConversationListCtrl', ['$scope', '$socket', 'Conversation', function ($scope, $socket, Conversation) {
+			$scope.$on('conversations page changed', function (event, page, paginator) {
+				if(paginator.perPage < 1) {
 					paginator.perPage = 4;
 				}
 
-				Message.list({
+				Conversation.list({
 					page: page,
 					per_page: paginator.perPage
 				}).$promise.then(function (pag) {
-					$scope.messages = pag.data;
+					$scope.conversations = pag.data;
 					angular.extend(paginator, pag);
 				});
-			})
+			});
 		}]);
 })();

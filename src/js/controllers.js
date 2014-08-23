@@ -5,6 +5,6 @@
 		.module('App/Controllers', [
 			'User/Controllers',
 			'Post/Controllers',
-			'Message/Controllers'
+			'Conversation/Controllers'
 		]);
 })();

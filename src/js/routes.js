@@ -6,7 +6,7 @@
 			'User/Routes',
 			'Post/Routes',
 			'Auth/Routes',
-			'Message/Routes'
+			'Conversation/Routes'
 		])
 
 		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {

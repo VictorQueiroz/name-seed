@@ -2,20 +2,20 @@
 	'use strict';
 
 	angular
-		.module('Message/Routes', [
-			'Message/Controllers'
+		.module('Conversation/Routes', [
+			'Conversation/Controllers'
 		])
 
 		.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider
-				.when('/messages', {
-					templateUrl: 'messages/list.tpl.html',
-					controller: 'MessageListCtrl'
+				.when('/conversations', {
+					templateUrl: 'conversations/list.tpl.html',
+					controller: 'ConversationListCtrl'
 				})
 
-				.when('/messages/:username', {
-					templateUrl: 'messages/show.tpl.html',
-					controller: 'MessageDetailCtrl'
+				.when('/conversations/:id', {
+					templateUrl: 'conversations/show.tpl.html',
+					controller: 'ConversationDetailCtrl'
 				});				
 		}]);
 })();

@@ -6,7 +6,7 @@ options = require('./config').database;
 var sequelize = new Sequelize(options.database, options.user, options.password, {
 	host: options.host,
 	dialect: options.dialect,
-  logging: options.logging,
+  logging: false,
 });
 
 sequelize

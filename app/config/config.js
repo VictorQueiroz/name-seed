@@ -5,6 +5,6 @@ exports.database = {
 	user: 'root',
 	password: null,
 	database: 'name_seed',
-	logging: false,
+	logging: console.log,
 	dialect: 'mysql'
 };
