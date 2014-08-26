@@ -3,6 +3,7 @@
 
 	angular.module('Auth', [
 		'ngRoute',
+		'ngSocketIO',
 
 		'Session/Service',
 

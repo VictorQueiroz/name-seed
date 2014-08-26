@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('Auth/Ctrl/Auth', [
-		'App/Services'
+		'ngSocketIO'
 	])
 
 	.controller('AuthCtrl', ['$scope', '$http', '$socket', '$location', '$window', function ($scope, $http, $socket, $location, $window) {

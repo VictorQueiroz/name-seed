@@ -16,6 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'bower_components/angular/angular.min.js',
+      'bower_components/angular-mocks/angular-mocks.js',      
       'bower_components/ng-paginator/angular-paginator.min.js',
       'bower_components/angular-resource/angular-resource.min.js',
       'bower_components/angular-route/angular-route.min.js',
@@ -26,9 +27,9 @@ module.exports = function(config) {
       'bower_components/angular-strap/dist/angular-strap.tpl.min.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'bower_components/angular-animate/angular-animate.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      '/vendor/angular-socketio/src/ngSocketIO.js',
       'src/js/**/{,*/}*.js',
-      'test/**/{,*/}*Spec.js'
+      'test/unit/**/{,*/}*Spec.js'
     ],
 
 

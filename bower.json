@@ -28,7 +28,8 @@
     "angular-translate": "~2.2.0",
     "passport-facebook": "~1.0.3",
     "ng-paginator": "*",
-    "moment": "~2.8.1"
+    "moment": "~2.8.1",
+    "angular-socketio": "*"
   },
   "devDependencies": {
     "faker": "~0.0.2",

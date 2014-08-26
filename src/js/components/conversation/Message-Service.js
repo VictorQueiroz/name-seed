@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('Conversation/Service/Message', [])
+		.module('Conversation/Service/Message', ['ngResource'])
 
 		.factory('Message', ['$resource', function ($resource) {
 			return $resource ('', {}, {

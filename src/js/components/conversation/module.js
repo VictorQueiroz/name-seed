@@ -2,9 +2,7 @@
 	'use strict';
 
 	angular
-		.module('Conversation', [
-			'App/Services',
-			
+		.module('Conversation', [			
 			'Conversation/Controllers',
 			'Conversation/Services',
 			'Conversation/Directives'

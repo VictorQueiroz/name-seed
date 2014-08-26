@@ -4,6 +4,7 @@
 	angular
 		.module('Post/Ctrl/PostCreate', [
 			'ngRoute',
+			'ngSocketIO',
 
 			'Post/Service'
 		])

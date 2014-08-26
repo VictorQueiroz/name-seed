@@ -5,7 +5,7 @@
 		.module('User/Ctrl/UserCreate', [
 			'ngRoute',
 
-			'User/Service',
+			'User/Service'
 		])
 
 		.controller('UserCreateCtrl', ['$scope', '$location', 'User', function ($scope, $location, User) {

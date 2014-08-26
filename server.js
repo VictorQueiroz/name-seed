@@ -7,8 +7,6 @@ io = require('socket.io')(server),
 controllers = require('./app/controllers'),
 db = require('./app/models');
 
-io.set('log level', 3);
-
 require('./app/config/passport')();
 
 controllers['socket.io'](io);

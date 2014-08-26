@@ -64,8 +64,6 @@ module.exports = function (sequelize) {
 			db: sequelize
 		})
 	}));
-
-	app.use(csrf());
 	
 	app.use(passport.initialize());
 	app.use(passport.session());
@@ -86,6 +84,7 @@ module.exports = function (sequelize) {
 
 	// Production only
 	if (app.get('env') === 'production') {
+		app.use(csrf());
 	}
 
 	return app; 

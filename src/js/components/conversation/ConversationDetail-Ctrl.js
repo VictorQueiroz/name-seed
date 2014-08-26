@@ -3,7 +3,8 @@
 
 	angular
 		.module('Conversation/Ctrl/ConversationDetail', [
-			'Conversation/Services'
+			'Conversation/Services',
+			'ngSocketIO'
 		])
 
 		.run(['$socket', function ($socket) {
@@ -31,7 +32,8 @@
 				conversation
 					.$promise
 					.then(function (conversation) {
-						console.log(conversation)
+						console.log(conversation);
+						
 						message.conversation_id = conversation.id;
 
 						message

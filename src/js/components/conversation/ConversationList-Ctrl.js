@@ -3,7 +3,8 @@
 
 	angular
 		.module('Conversation/Ctrl/ConversationList', [
-			'Conversation/Service'
+			'Conversation/Service',
+			'ngSocketIO'
 		])
 
 		.controller('ConversationListCtrl', ['$scope', '$socket', 'Conversation', function ($scope, $socket, Conversation) {

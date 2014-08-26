@@ -3,6 +3,8 @@
 
 	angular
 		.module('Post/Ctrl/PostList', [
+			'ngSocketIO',
+
 			'Post/Service',
 			'App/Services'
 		])

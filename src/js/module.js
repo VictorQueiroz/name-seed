@@ -7,6 +7,7 @@
 			'ngAnimate',
 			'ngSanitize',
 
+			'ngSocketIO',
 			'ui.bootstrap',
 			'mgcrea.ngStrap',	
 			'pascalprecht.translate',

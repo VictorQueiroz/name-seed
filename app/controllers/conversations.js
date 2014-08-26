@@ -73,11 +73,40 @@ exports.get = function (req, res) {
 
 exports.store = function (req, res) {
 	var data = _.pick(req.body,
-		'content',
-		'conversation_id'
+		'title'
 	);
 
 	data.author_id = req.user.id;
+
+	Conversation
+		.create(data)
+		.success(function (conversation) {
+			User
+				.find({
+					where: {
+						id: req.user.id
+					}
+				})
+
+				.success(function (user) {
+					conversation.addMember(user).success(function () {
+						Conversation
+							.find({
+								where: {
+									id: conversation.id
+								},
+
+								include: [{
+									model: User, as: 'Members'
+								}]
+							})
+
+							.success(function (conversation) {
+								res.json(conversation);
+							});
+					});
+				})
+		})
 };
 
 exports.update = function (req, res) {
