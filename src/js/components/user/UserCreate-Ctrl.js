@@ -2,11 +2,7 @@
 	'use strict';
 
 	angular
-		.module('User/Ctrl/UserCreate', [
-			'ngRoute',
-
-			'User/Service'
-		])
+		.module('User/Ctrl/UserCreate', [])
 
 		.controller('UserCreateCtrl', ['$scope', '$location', 'User', function ($scope, $location, User) {
 			$scope.user = new User();

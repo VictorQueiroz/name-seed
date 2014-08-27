@@ -3,7 +3,10 @@
 
 	angular
 		.module('User', [
+			'ngRoute',
+
 			'User/Controllers',
-			'User/Services'
+			'User/Services',
+			'User/Routes'
 		]);
 })();

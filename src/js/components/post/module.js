@@ -3,7 +3,12 @@
 
 	angular
 		.module('Post', [
+			'ngRoute',
+			'ngSocketIO',
+			'ngMoment',
+
 			'Post/Controllers',
-			'Post/Services'
+			'Post/Services',
+			'Post/Routes'
 		]);
 })();

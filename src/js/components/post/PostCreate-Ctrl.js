@@ -2,11 +2,7 @@
 	'use strict';
 
 	angular
-		.module('Post/Ctrl/PostCreate', [
-			'ngSocketIO',
-
-			'Post/Service'
-		])
+		.module('Post/Ctrl/PostCreate', [])
 
 		.controller('PostCreateCtrl', ['$scope', '$location', '$socket', 'Post', function ($scope, $location, $socket, Post) {
 			$scope.post = new Post();

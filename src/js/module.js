@@ -33,7 +33,7 @@
 				'X-CSRF-Token': _CSRF
 			};
 
-			console.log('Configuring module App...');
+			console.log('Configuring module: App...');
 		}])
 
 		.run(['$rootScope', '$socket', function($rootScope, $socket) {
@@ -51,6 +51,6 @@
 				});
 			});
 
-			console.log('Running module App...');
+			console.log('Running module: App...');
 		}]);
 })();

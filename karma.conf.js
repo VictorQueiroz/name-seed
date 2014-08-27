@@ -27,7 +27,8 @@ module.exports = function(config) {
       'bower_components/angular-strap/dist/angular-strap.tpl.min.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'bower_components/angular-animate/angular-animate.min.js',
-      '/vendor/angular-socketio/src/ngSocketIO.js',
+      'bower_components/angular-socketio/dist/angular-socketio.min.js',
+      'bower_components/ng-moment/dist/ng-moment.min.js',
       'src/js/**/{,*/}*.js',
       'test/unit/**/{,*/}*Spec.js'
     ],

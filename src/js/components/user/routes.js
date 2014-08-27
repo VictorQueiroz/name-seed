@@ -2,11 +2,7 @@
 	'use strict';
 
 	angular
-		.module('User/Routes', [
-			'ngRoute',
-
-			'User/Controllers'
-		])
+		.module('User/Routes', [])
 
 		.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider

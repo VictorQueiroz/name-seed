@@ -5,6 +5,7 @@
 		.module('Conversation', [			
 			'Conversation/Controllers',
 			'Conversation/Services',
-			'Conversation/Directives'
+			'Conversation/Directives',
+			'Conversation/Routes'
 		]);
 })();

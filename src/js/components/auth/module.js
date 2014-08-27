@@ -7,7 +7,8 @@
 
 		'Session/Service',
 
-		'Auth/Controllers'
+		'Auth/Controllers',
+		'Auth/Routes'
 	])
 
 	.run(['$rootScope', '$route', '$location', '$socket', 'Session', function($rootScope, $route, $location, $socket, Session) {

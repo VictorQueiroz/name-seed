@@ -3,15 +3,12 @@
 
 	angular
 		.module('App/Routes', [
-			'ngRoute',
-
-			'User/Routes',
-			'Post/Routes',
-			'Auth/Routes',
-			'Conversation/Routes'
+			'ngRoute'
 		])
 
 		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+			console.log('Configuring module App/Routes...');
+
 			$routeProvider
 
 				.when('/', {
@@ -25,5 +22,9 @@
 				.otherwise({ redirectTo: '/' });
 
 			$locationProvider.html5Mode(true);
-		}]);
+		}])
+
+		.run(function () {
+			console.log('Running module App/Routes...');
+		});
 })();

@@ -2,12 +2,7 @@
 	'use strict';
 
 	angular
-		.module('Post/Ctrl/PostList', [
-			'ngSocketIO',
-			'ngMoment',
-
-			'Post/Service'
-		])
+		.module('Post/Ctrl/PostList', [])
 
 		.controller('PostListCtrl', ['$scope', '$location', '$socket', '$moment', 'Post', function ($scope, $location, $socket, $moment, Post) {
 			$scope.$watch('paginator.perPage', function(perPage) {
