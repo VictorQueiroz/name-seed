@@ -3,6 +3,8 @@
 
 	angular
 		.module('App/Routes', [
+			'ngRoute',
+
 			'User/Routes',
 			'Post/Routes',
 			'Auth/Routes',

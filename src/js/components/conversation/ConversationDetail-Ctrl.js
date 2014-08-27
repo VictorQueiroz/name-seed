@@ -4,7 +4,8 @@
 	angular
 		.module('Conversation/Ctrl/ConversationDetail', [
 			'Conversation/Services',
-			'ngSocketIO'
+			'ngSocketIO',
+			'ngRoute'
 		])
 
 		.run(['$socket', function ($socket) {

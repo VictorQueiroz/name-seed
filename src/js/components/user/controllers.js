@@ -7,6 +7,6 @@
 			
 			'User/Ctrl/UserList',
 			'User/Ctrl/UserCreate',
-			'User/Ctrl/UserDetail',
+			'User/Ctrl/UserDetail'
 		]);
 })();

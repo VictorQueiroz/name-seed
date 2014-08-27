@@ -3,6 +3,8 @@
 
 	angular
 		.module('Post/Routes', [
+			'ngRoute',
+
 			'Post/Controllers'
 		])
 

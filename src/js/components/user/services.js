@@ -2,5 +2,7 @@
 	'use strict';
 
 	angular
-		.module('User/Services', []);
+		.module('User/Services', [
+			'User/Service'
+		]);
 })();

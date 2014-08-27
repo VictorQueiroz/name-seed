@@ -3,6 +3,8 @@
 
 	angular
 		.module('Conversation/Routes', [
+			'ngRoute',
+
 			'Conversation/Controllers'
 		])
 

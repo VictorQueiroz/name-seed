@@ -1,14 +1,14 @@
 (function () {
 	'use strict';
 
-	var MODULE_NAME = 'Conversation/Service/Message',
+	var MODULE_NAME = 'Post/Service',
 	MODULE_DEPENDENCIES = [
 		'ngResource'
 	],
 	MODULE_CONTROLLERS = [],
 	MODULE_DIRECTIVES = [],
 	MODULE_SERVICES = [
-		'Message'
+		'Post'
 	];
 
 	describe(MODULE_NAME + ' module', function () {
@@ -21,15 +21,15 @@
 				$httpBackend = $injector.get('$httpBackend');
 			}));
 
-			describe('Message', function () {
-				var Message;
+			describe('Post', function () {
+				var Post;
 
-				if(MODULE_SERVICES.indexOf('Message') === -1) {
+				if(MODULE_SERVICES.indexOf('Post') === -1) {
 					return;
 				}
 
 				beforeEach(inject(function ($injector) {
-					Message = $injector.get('Message');
+					Post = $injector.get('Post');
 				}));			
 
 				afterEach(function () {
@@ -37,24 +37,24 @@
 					$httpBackend.verifyNoOutstandingRequest();
 				});
 
-				it('should list messages', function () {
+				it('should list posts', function () {
 					$httpBackend
-						.whenGET('/api/messages')
+						.whenGET('/api/posts')
 						.respond(200, {
 							data: [
 								{
-									content: 'First message',
+									title: 'First post',
 									author: {	name: 'Alex Serscon' }
 								}
 							]
 						});
 
-					var message = Message.list().$promise;
+					var post = Post.list().$promise;
 
-					message
-						.then(function (messages) {
-							expect(messages.data[0].content).toBe('First message');
-							expect(messages.data[0].author.name).toBe('Alex Serscon');
+					post
+						.then(function (posts) {
+							expect(posts.data[0].title).toBe('First post');
+							expect(posts.data[0].author.name).toBe('Alex Serscon');
 						})
 
 						.catch(function (err) {
@@ -64,23 +64,23 @@
 					$httpBackend.flush();
 				});
 
-				it('should create messages', function () {
+				it('should create posts', function () {
 					$httpBackend
-						.whenPOST('/api/messages')
+						.whenPOST('/api/posts')
 						.respond(201, {
-							content: 'New message',
+							title: 'New post',
 							author: {name: 'Alex Serscon'}
 						});
 
-					var message = new Message({
-						content: 'New message'
+					var post = new Post({
+						title: 'New post'
 					});
 
-					message
+					post
 						.$save()
-						.then(function (message) {
-							expect(message.author instanceof Object).toBe(true);
-							expect(message.author.name).toBe('Alex Serscon');
+						.then(function (post) {
+							expect(post.author instanceof Object).toBe(true);
+							expect(post.author.name).toBe('Alex Serscon');
 						})
 
 						.catch(function (err) {
@@ -90,42 +90,42 @@
 					$httpBackend.flush();
 				});
 
-				it('should update messages', function () {
+				it('should update posts', function () {
 					$httpBackend
-						.whenGET('/api/messages/1')
+						.whenGET('/api/posts/1')
 						.respond(200, {
 							id: 1,
-							content: 'First message',
+							title: 'First post',
 							author: {	name: 'Alex Serscon' }
 						});
 
 					$httpBackend
-						.whenPUT('/api/messages/1')
+						.whenPUT('/api/posts/1')
 						.respond(201, {
-							content: 'First message (updated)',
+							title: 'First post (updated)',
 							author: { name: 'Alex Serscon' }
 						});
 
-					var message = Message.get({
+					var post = Post.get({
 						id: 1
 					});
 
-					message
+					post
 						.$promise
-						.then(function (message) {
-							expect(message.content).toBe('First message');
+						.then(function (post) {
+							expect(post.title).toBe('First post');
 						})
 
 						.catch(function (err) {
 							console.log(err);
 						});
 
-					message
+					post
 						.$update({
 							id: 1
 						})
-						.then(function (message) {
-							expect(message.content).toBe('First message (updated)');
+						.then(function (post) {
+							expect(post.title).toBe('First post (updated)');
 						})
 
 						.catch(function (err) {
@@ -135,24 +135,24 @@
 					$httpBackend.flush();
 				});
 
-				it('should destroy messages', function () {
+				it('should destroy posts', function () {
 					$httpBackend
-						.whenGET('/api/messages/1')
+						.whenGET('/api/posts/1')
 						.respond(200, {
 							id: 1,
-							content: 'First message',
+							title: 'First post',
 							author: {	name: 'Alex Serscon' }
 						});
 
 					$httpBackend
-						.whenDELETE('/api/messages/1')
+						.whenDELETE('/api/posts/1')
 						.respond(200, {
 							result: true
 						});
 
-					var message = Message.get({	id: 1	});
+					var post = Post.get({	id: 1	});
 
-					message
+					post
 						.$destroy({ id: 1 })
 						.then(function (response) {
 							expect(response.result).toBe(true);

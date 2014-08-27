@@ -15,21 +15,22 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.21",
-    "angular-route": "~1.2.21",
-    "angular-resource": "~1.2.21",
-    "angular-cookies": "~1.2.21",
-    "angular-sanitize": "~1.2.21",
+    "angular": "~1.2.23",
+    "angular-route": "~1.2.23",
+    "angular-resource": "~1.2.23",
+    "angular-cookies": "~1.2.23",
+    "angular-sanitize": "~1.2.23",
     "angular-bootstrap": "~0.11.0",
     "angular-strap": "~2.0.3",
     "bootstrap-sass": "~3.0.2",
-    "angular-animate": "~1.2.21",
+    "angular-animate": "~1.2.23",
     "fontawesome": "~4.1.0",
     "angular-translate": "~2.2.0",
     "passport-facebook": "~1.0.3",
     "ng-paginator": "*",
     "moment": "~2.8.1",
-    "angular-socketio": "*"
+    "angular-socketio": "*",
+    "ng-moment": "*"
   },
   "devDependencies": {
     "faker": "~0.0.2",

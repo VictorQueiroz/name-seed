@@ -13,14 +13,17 @@
 			'pascalprecht.translate',
 			'victorqueiroz.ngPaginator',
 
-			'App/Routes',
 			'App/Controllers',
 			'App/Filters',
 			'App/Directives',
 			'App/Services',
 			'App/Partials',
+			'App/Routes',			
 
-			'Auth'
+			'Auth',
+			'Conversation',
+			'Post',
+			'User'
 		])
 
 		.constant('_CSRF', angular.element(document.querySelector('meta[name=_csrf]')).attr('content'))
@@ -29,6 +32,8 @@
 			$httpProvider.defaults.headers.common = {
 				'X-CSRF-Token': _CSRF
 			};
+
+			console.log('Configuring module App...');
 		}])
 
 		.run(['$rootScope', '$socket', function($rootScope, $socket) {
@@ -45,5 +50,7 @@
 				$rootScope.$on('user disconnected', function () {
 				});
 			});
+
+			console.log('Running module App...');
 		}]);
 })();

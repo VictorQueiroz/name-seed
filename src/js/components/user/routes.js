@@ -3,6 +3,8 @@
 
 	angular
 		.module('User/Routes', [
+			'ngRoute',
+
 			'User/Controllers'
 		])
 

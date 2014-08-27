@@ -14,20 +14,6 @@
 	describe(MODULE_NAME + ' module', function () {
 		beforeEach(module(MODULE_NAME));
 
-		describe('Dependencies', function () {
-			var MODULE = angular.module(MODULE_NAME),
-			DEPENDENCIES = MODULE.requires,
-			HAS_MODULE = function (module) {
-				return DEPENDENCIES.indexOf(module) > -1 ? true : false;
-			};
-
-			MODULE_DEPENDENCIES.forEach(function (dependency) {
-				it('should have' + dependency + ' as dependency', function () {
-					expect(HAS_MODULE(dependency)).toBe(true);
-				});
-			});
-		});
-
 		describe('Services', function () {
 			var $httpBackend;
 

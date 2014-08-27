@@ -4,9 +4,9 @@
 	angular
 		.module('Post/Ctrl/PostList', [
 			'ngSocketIO',
+			'ngMoment',
 
-			'Post/Service',
-			'App/Services'
+			'Post/Service'
 		])
 
 		.controller('PostListCtrl', ['$scope', '$location', '$socket', '$moment', 'Post', function ($scope, $location, $socket, $moment, Post) {
