@@ -18,10 +18,4 @@ module.exports = function (socket) {
 			socket.broadcast.emit('user new', user);
 		});
 	});
-
-	socket.on('user all', function () {
-		User.findAll().success(function(users){
-			socket.emit('user all', users);
-		});
-	});	
 };

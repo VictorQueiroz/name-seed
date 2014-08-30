@@ -21,7 +21,6 @@
 			'App/Routes',			
 
 			'Auth',
-			'Conversation',
 			'Post',
 			'User'
 		])
