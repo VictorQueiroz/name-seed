@@ -30,7 +30,8 @@
     "ng-paginator": "*",
     "moment": "~2.8.1",
     "angular-socketio": "*",
-    "ng-moment": "*"
+    "ng-moment": "*",
+    "requirejs": "~2.1.14"
   },
   "devDependencies": {
     "faker": "~0.0.2",

@@ -57,6 +57,8 @@ gulp.task('vendors', ['clean'], function () {
 			'bower_components/codemirror/addon/**/*.js'
 		]}, {	name: 'underscore', paths: [
 			'bower_components/underscore/underscore-min.js'
+		]}, { name: 'requirejs', paths: [
+			'bower_components/requirejs/require.js'
 		]}
 	];
 
@@ -87,28 +89,25 @@ gulp.task('scripts', ['clean'], function () {
 	var dest = path.join(paths.public, 'js');
 
 	return gulp.src(paths.scripts)
-		.pipe(sourcemaps.init())
-			.pipe(jshint({
-				lookup: true
-			}))
-			.pipe(jshint.reporter('default', {
-				verbose: true
-			}))
-			.pipe(uglify({
-				compress: {
-					drop_debugger: false,
-					global_defs: {}
-				},
-				preserveComments: function () {
-					return false;
-				},
-				output: {
-					semicolons: false,
-					comments: false
-				}
-			}))
-			.pipe(concat('base.min.js'))
-		.pipe(sourcemaps.write())
+		.pipe(jshint({
+			lookup: true
+		}))
+		.pipe(jshint.reporter('default', {
+			verbose: true
+		}))
+		.pipe(uglify({
+			compress: {
+				drop_debugger: false,
+				global_defs: {}
+			},
+			preserveComments: function () {
+				return false;
+			},
+			output: {
+				semicolons: false,
+				comments: false
+			}
+		}))
 		.pipe(gulp.dest(dest));
 });
 

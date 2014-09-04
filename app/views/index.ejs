@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="App" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="_csrf" content="<%= _csrf %>">
@@ -32,7 +32,7 @@
             <li if-guest><a href="/about-us">About us</a></li>
             <li if-authenticated><a href="/posts">Posts</a></li>
           </ul>
-          <ul ng-controller="ProfileCtrl" class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
             <li if-guest><a href="/register">Register</a></li>
             <li if-guest><a href="/authentication">Authentication</a></li>
             <li if-authenticated class="dropdown"><a href="" class="dropdown-toggle"><img src="http://placehold.it/24x24" class="img-circle">&nbsp;{{ user.name }}<span class="caret"></span></a>
@@ -58,33 +58,6 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="/vendor/codemirror/codemirror.min.js"></script>
-
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="/vendor/underscore/underscore.min.js"></script>
-
-    <!-- AngularJS Modules -->
-    <script type="text/javascript" src="/vendor/angular/angular.min.js"></script>
-    <script type="text/javascript" src="/vendor/ng-paginator/angular-paginator.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-resource/angular-resource.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-route/angular-route.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-translate/angular-translate.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-sanitize/angular-sanitize.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-cookies/angular-cookies.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-strap/dist/angular-strap.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-strap/dist/angular-strap.tpl.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-animate/angular-animate.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-ui-codemirror/ui-codemirror.min.js"></script>
-    <script type="text/javascript" src="/vendor/angular-socketio/dist/angular-socketio.min.js"></script>
-    <script type="text/javascript" src="/vendor/ng-underscore.js/dist/ng-underscore.min.js"></script>
-    <script type="text/javascript" src="/vendor/ng-moment/dist/ng-moment.min.js"></script>
-    
-    <!-- Moment -->
-    <script type="text/javascript" src="/vendor/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="/vendor/moment/locale/pt-br.js"></script>
-
-    <script type="text/javascript" src="/js/partials.min.js"></script>
-    <script type="text/javascript" src="/js/base.min.js"></script>
+    <script type="text/javascript" data-main="js/main" src="/vendor/requirejs/requirejs.min.js"></script>
   </body>
 </html>

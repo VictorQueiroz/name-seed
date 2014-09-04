@@ -1,4 +1,27 @@
-(function () {
+define([
+	'angular',
+
+	'ngRoute',
+	'ngAnimate',
+	'ngSanitize',
+	'ngSocketIO',
+
+	'ui.bootstrap',
+	'mgcrea.ngStrap',
+	'pascalprecht.translate',
+	'victorqueiroz.ngPaginator',
+
+	'controllers',
+	'filters',
+	'services',
+	'partials.min',
+	'routes',
+	'directives',
+
+	// 'Auth',
+	// 'Post',
+	// 'components/user/module'
+], function (angular) {
 	'use strict';
 
 	angular
@@ -20,9 +43,9 @@
 			'App/Partials',
 			'App/Routes',			
 
-			'Auth',
-			'Post',
-			'User'
+			// 'Auth',
+			// 'Post',
+			// 'User'
 		])
 
 		.constant('_CSRF', angular.element(document.querySelector('meta[name=_csrf]')).attr('content'))
@@ -32,7 +55,7 @@
 				'X-CSRF-Token': _CSRF
 			};
 
-			console.log('Configuring module: App...');
+			console.log('Configuring module: App');
 		}])
 
 		.run(['$rootScope', '$socket', function($rootScope, $socket) {
@@ -50,14 +73,11 @@
 				});
 			});
 
-			console.log('Running module: App...');
+			console.log('Running module: App');
 		}]);
-})();
-
-(function () {
-	'use strict';
+	
 
 	angular.element(document).ready(function () {
 		angular.bootstrap(document, ['App']);
 	});
-})();
+});

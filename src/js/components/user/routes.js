@@ -1,4 +1,4 @@
-(function () {
+define(['angular'], function (angular) {
 	'use strict';
 
 	angular
@@ -26,5 +26,13 @@
 						$window.location.href = '/auth/destroy';
 					}
 				});
-		}]);
-})();
+		}])
+
+		.config(function () {
+			console.log('Configuring module: User/Routes');
+		})
+
+		.run(function () {
+			console.log('Running module: User/Routes');
+		});
+});

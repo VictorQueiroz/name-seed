@@ -1,4 +1,4 @@
-(function () {
+define(['angular', 'ngResource'], function (angular) {
 	'use strict';
 
 	angular
@@ -13,4 +13,4 @@
 				'destroy': {url: '/api/users/:id', params: {id: '@id'}, method: 'DELETE', isArray: false}
 			});
 		}]);
-})();
+});

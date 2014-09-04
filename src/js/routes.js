@@ -1,11 +1,11 @@
-(function () {
+define(['angular'], function (angular) {
 	'use strict';
 
 	angular
 		.module('App/Routes', [])
 
 		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-			console.log('Configuring module App/Routes...');
+			console.log('Configuring module: App/Routes');
 
 			$routeProvider
 
@@ -23,6 +23,6 @@
 		}])
 
 		.run(function () {
-			console.log('Running module App/Routes...');
+			console.log('Running module: App/Routes');
 		});
-})();
+});
