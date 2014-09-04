@@ -7,17 +7,17 @@
 		.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider
 				.when('/users/:id', {
-					templateUrl: 'users/show.tpl.html',
+					templateUrl: 'user/show.tpl.html',
 					controller: 'UserDetailCtrl'
 				})
 
 				.when('/register', {
-					templateUrl: 'users/create.tpl.html',
+					templateUrl: 'user/create.tpl.html',
 					controller: 'UserCreateCtrl'
 				})		
 
 				.when('/profile', {
-					templateUrl: 'users/profile.tpl.html',
+					templateUrl: 'user/profile.tpl.html',
 					controller: 'ProfileCtrl'
 				})
 

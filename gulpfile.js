@@ -1,14 +1,14 @@
 var gulp = require('gulp');
+var path = require('path');
 
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
-var templateCache = require('gulp-angular-templatecache');
+var ngTemplates = require('gulp-ng-templates');
 var htmlmin = require('gulp-htmlmin');
 
 var sass = require('gulp-sass');
-var uncss = require('gulp-uncss');
 var cssmin = require('gulp-cssmin');
 var prefix = require('gulp-autoprefixer');
 var rename = require('gulp-rename');
@@ -20,7 +20,10 @@ var nodemon = require('gulp-nodemon');
 var fs = require('fs');
 
 var paths = {};
-paths.partials = ['src/partials/**/{,*/}*.html'];
+paths.partials = [
+	'src/js/partials/**/*.tpl.html',
+	'src/js/components/**/partials/**/*.tpl.html',
+];
 paths.stylesheets = ['src/scss/**/{,*/}*.{scss,sass}'];
 paths.scripts = ['src/js/**/{,*/}*.js'];
 paths.views = 'app/views';
@@ -31,6 +34,8 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('stylesheets', ['clean'], function () {
+	var dest = path.join(paths.public, 'css');
+
 	gulp.src(paths.stylesheets)
 		.pipe(sass())
 		.pipe(cssmin())
@@ -38,10 +43,49 @@ gulp.task('stylesheets', ['clean'], function () {
 		.pipe(rename({
 			basename: 'style', suffix: '.min'
 		}))
-		.pipe(gulp.dest(paths.public + '/css'));
+		.pipe(gulp.dest(dest));
+});
+
+// build all vendors
+gulp.task('vendors', ['clean'], function () {
+	var vendors = [
+		{name: 'codemirror', paths: [
+			'bower_components/codemirror/lib/codemirror.js',
+			'bower_components/codemirror/mode/**/*.js',
+			'!bower_components/codemirror/mode/**/*_test.js',
+			'!bower_components/codemirror/mode/**/test.js',
+			'bower_components/codemirror/addon/**/*.js'
+		]}, {	name: 'underscore', paths: [
+			'bower_components/underscore/underscore-min.js'
+		]}
+	];
+
+	vendors.forEach(function (vendor) {
+		var dest = path.join(paths.public, 'vendor', vendor.name);
+
+		gulp.src(vendor.paths)
+			.pipe(sourcemaps.init())
+				.pipe(uglify({
+					compress: {
+						drop_debugger: true,
+						unused: true,
+						booleans: true,
+						// unsafe: true
+					}
+				}))
+				.pipe(concat(vendor.name))
+				.pipe(rename({
+					suffix: '.min',
+					extname: '.js'
+				}))
+			.pipe(sourcemaps.write())
+			.pipe(gulp.dest(dest));
+	});
 });
 
 gulp.task('scripts', ['clean'], function () {
+	var dest = path.join(paths.public, 'js');
+
 	return gulp.src(paths.scripts)
 		.pipe(sourcemaps.init())
 			.pipe(jshint({
@@ -52,8 +96,8 @@ gulp.task('scripts', ['clean'], function () {
 			}))
 			.pipe(uglify({
 				compress: {
-					drop_console: false,
-					unsafe: false
+					drop_debugger: false,
+					global_defs: {}
 				},
 				preserveComments: function () {
 					return false;
@@ -65,25 +109,29 @@ gulp.task('scripts', ['clean'], function () {
 			}))
 			.pipe(concat('base.min.js'))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(paths.public + '/js'));
+		.pipe(gulp.dest(dest));
 });
 
 gulp.task('partials', ['clean'], function () {
+	var dest = path.join(paths.public, 'js');
+
 	return gulp.src(paths.partials)
 		.pipe(htmlmin({collapseWhitespace: true}))
-		.pipe(templateCache({
-			module: 'App/Partials',
+		.pipe(ngTemplates({
 			filename: 'partials.js',
-			standalone: true
+			module: 'App/Partials',
+			path: function (path, base) {
+				return path.replace(base, '').replace('/partials', '');
+			}
 		}))
-		.pipe(uglify())		
-		.pipe(gulp.dest(paths.public + '/js'));
+		.pipe(uglify())
+		.pipe(rename({
+			suffix: '.min'
+		}))
+		.pipe(gulp.dest(dest));
 });
 
 gulp.task('server', ['clean'], function () {
-	// require('./server');
-
-	// very slow for development
 	nodemon({
 		script: 'server.js'
 	})
@@ -108,3 +156,4 @@ gulp.task('watch', ['clean'], function () {
 });
 
 gulp.task('default', ['server', 'watch', 'stylesheets', 'scripts', 'partials']);
+gulp.task('build', ['stylesheets', 'scripts', 'partials']);

@@ -7,22 +7,22 @@
 		.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider
 				.when('/posts', {
-					templateUrl: 'posts/list.tpl.html',
+					templateUrl: 'post/list.tpl.html',
 					controller: 'PostListCtrl'
 				})
 
 				.when('/posts/create', {
-					templateUrl: 'posts/create.tpl.html',
+					templateUrl: 'post/create.tpl.html',
 					controller: 'PostCreateCtrl'
 				})
 
 				.when('/posts/:id', {
-					templateUrl: 'posts/show.tpl.html',
+					templateUrl: 'post/show.tpl.html',
 					controller: 'PostDetailCtrl'
 				})
 
 				.when('/posts/:id/edit', {
-					templateUrl: 'posts/edit.tpl.html',
+					templateUrl: 'post/edit.tpl.html',
 					controller: 'PostEditCtrl'
 				});
 		}]);

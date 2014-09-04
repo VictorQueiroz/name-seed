@@ -1,11 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('Auth/Routes', [
-		'ngRoute',
-
-		'Auth/Controllers'
-	])
+	angular.module('Auth/Routes', [])
 
 	.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider

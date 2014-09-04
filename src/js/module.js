@@ -53,3 +53,11 @@
 			console.log('Running module: App...');
 		}]);
 })();
+
+(function () {
+	'use strict';
+
+	angular.element(document).ready(function () {
+		angular.bootstrap(document, ['App']);
+	});
+})();

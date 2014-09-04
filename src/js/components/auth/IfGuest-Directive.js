@@ -1,9 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('Auth/Directive/IfGuest', [
-		'Session/Service'
-	])
+	angular.module('Auth/Directive/IfGuest', [])
 
 	.directive('ifGuest', ['Session', function(Session) {
 		return {

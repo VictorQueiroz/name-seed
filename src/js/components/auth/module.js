@@ -4,11 +4,10 @@
 	angular.module('Auth', [
 		'ngRoute',
 		'ngSocketIO',
-
-		'Session/Service',
-
+		'Session',
 		'Auth/Controllers',
-		'Auth/Routes'
+		'Auth/Routes',
+		'Auth/Directives'
 	])
 
 	.run(['$rootScope', '$route', '$location', '$socket', 'Session', function($rootScope, $route, $location, $socket, Session) {

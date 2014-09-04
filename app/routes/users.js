@@ -28,7 +28,7 @@ module.exports = function (app) {
 		failureRedirect: '/login'
 	}));
 
-	app.route('/auth/check').get(filters.authenticated, function(req, res, next) {
+	app.route('/auth/check').get(function(req, res, next) {
 		if(req.isAuthenticated())
 			res.json({result: true, user: _.pick(req.user, 'email', 'name', 'username')});
 		else 

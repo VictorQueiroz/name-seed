@@ -2,9 +2,7 @@
 	'use strict';
 
 	angular
-		.module('App/Routes', [
-			'ngRoute'
-		])
+		.module('App/Routes', [])
 
 		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 			console.log('Configuring module App/Routes...');

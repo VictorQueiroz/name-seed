@@ -1,9 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('Auth/Ctrl/Auth', [
-		'ngSocketIO'
-	])
+	angular.module('Auth/Ctrl/Auth', [])
 
 	.controller('AuthCtrl', ['$scope', '$http', '$socket', '$location', '$window', function ($scope, $http, $socket, $location, $window) {
 		$scope.authenticate = function (credentials) {
