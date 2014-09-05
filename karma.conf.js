@@ -100,7 +100,7 @@ module.exports = function(config) {
         included: false
       },
 
-      'test/unit/test-main.js'
+      'test/unit/main.js'
     ],
 
 

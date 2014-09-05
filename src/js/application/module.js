@@ -10,6 +10,7 @@ define([
 	'ngStrap',
 	'ngPaginator',
 	'ngTranslate',
+	'ngMoment',
 
 	'App/controllers',
 	'App/filters',
@@ -29,6 +30,7 @@ define([
 			'ngRoute',
 			'ngAnimate',
 			'ngSanitize',
+			'ngMoment',
 
 			'ngSocketIO',
 			'ui.bootstrap',
@@ -56,7 +58,9 @@ define([
 			};
 		}])
 
-		.run(['$rootScope', '$socket', function($rootScope, $socket) {
+		.run(['$rootScope', '$moment', '$socket', function($rootScope, $moment, $socket) {
+			$moment.locale('pt-br');
+
 			$socket().then(function(socket) {
 				socket.on('user connected', function () {
 					console.log('New user connected!');
