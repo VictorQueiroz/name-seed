@@ -1,4 +1,7 @@
-(function () {
+define([
+	'ngMock',
+	'App'
+], function () {
 	'use strict';
 
 	var MODULE_NAME = 'App',
@@ -8,5 +11,13 @@
 
 	describe(MODULE_NAME + ' module', function () {
 		beforeEach(module(MODULE_NAME));
+
+		beforeEach(inject(function ($injector) {
+
+		}))
+
+		it('should', function () {
+			expect(1).toBe(1)
+		})
 	});
-})();
+});

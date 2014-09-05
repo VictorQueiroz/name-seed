@@ -1,4 +1,4 @@
-(function () {
+define(['ngMock'], function () {
 	'use strict';
 
 	var MODULE_NAME = 'Post/Ctrl/PostCreate',
@@ -8,4 +8,4 @@
 	describe(MODULE_NAME + ' module', function () {
 		beforeEach(module(MODULE_NAME));
 	});
-})();
+});

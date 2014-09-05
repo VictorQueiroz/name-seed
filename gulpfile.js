@@ -49,13 +49,7 @@ gulp.task('stylesheets', ['clean'], function () {
 // build all vendors
 gulp.task('vendors', ['clean'], function () {
 	var vendors = [
-		{name: 'codemirror', paths: [
-			'bower_components/codemirror/lib/codemirror.js',
-			'bower_components/codemirror/mode/**/*.js',
-			'!bower_components/codemirror/mode/**/*_test.js',
-			'!bower_components/codemirror/mode/**/test.js',
-			'bower_components/codemirror/addon/**/*.js'
-		]}, {	name: 'underscore', paths: [
+		{	name: 'underscore', paths: [
 			'bower_components/underscore/underscore-min.js'
 		]}, { name: 'requirejs', paths: [
 			'bower_components/requirejs/require.js'
@@ -66,21 +60,19 @@ gulp.task('vendors', ['clean'], function () {
 		var dest = path.join(paths.public, 'vendor', vendor.name);
 
 		gulp.src(vendor.paths)
-			.pipe(sourcemaps.init())
-				.pipe(uglify({
-					compress: {
-						drop_debugger: true,
-						unused: true,
-						booleans: true,
-						// unsafe: true
-					}
-				}))
-				.pipe(concat(vendor.name))
-				.pipe(rename({
-					suffix: '.min',
-					extname: '.js'
-				}))
-			.pipe(sourcemaps.write())
+			.pipe(uglify({
+				compress: {
+					drop_debugger: true,
+					unused: true,
+					booleans: true,
+					// unsafe: true
+				}
+			}))
+			.pipe(concat(vendor.name))
+			.pipe(rename({
+				suffix: '.min',
+				extname: '.js'
+			}))
 			.pipe(gulp.dest(dest));
 	});
 });
@@ -89,25 +81,27 @@ gulp.task('scripts', ['clean'], function () {
 	var dest = path.join(paths.public, 'js');
 
 	return gulp.src(paths.scripts)
-		.pipe(jshint({
-			lookup: true
-		}))
-		.pipe(jshint.reporter('default', {
-			verbose: true
-		}))
-		.pipe(uglify({
-			compress: {
-				drop_debugger: false,
-				global_defs: {}
-			},
-			preserveComments: function () {
-				return false;
-			},
-			output: {
-				semicolons: false,
-				comments: false
-			}
-		}))
+		.pipe(sourcemaps.init())
+			.pipe(jshint({
+				lookup: true
+			}))
+			.pipe(jshint.reporter('default', {
+				verbose: true
+			}))
+			.pipe(uglify({
+				compress: {
+					drop_debugger: false,
+					global_defs: {}
+				},
+				preserveComments: function () {
+					return false;
+				},
+				output: {
+					semicolons: false,
+					comments: false
+				}
+			}))
+		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(dest));
 });
 

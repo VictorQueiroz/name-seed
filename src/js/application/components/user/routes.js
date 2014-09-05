@@ -1,0 +1,36 @@
+define(['angular'], function (angular) {
+	'use strict';
+
+	angular
+		.module('User/Routes', [])
+
+		.config(['$routeProvider', function ($routeProvider) {
+			console.log('Configuring module: User/Routes');
+
+			$routeProvider
+				.when('/users/:id', {
+					templateUrl: 'user/show.tpl.html',
+					controller: 'UserDetailCtrl'
+				})
+
+				.when('/register', {
+					templateUrl: 'user/create.tpl.html',
+					controller: 'UserCreateCtrl'
+				})		
+
+				.when('/profile', {
+					templateUrl: 'user/profile.tpl.html',
+					controller: 'ProfileCtrl'
+				})
+
+				.when('/auth/destroy', {
+					controller: function ($window) {
+						$window.location.href = '/auth/destroy';
+					}
+				});
+		}])
+
+		.run(function () {
+			console.log('Running module: User/Routes');
+		});
+});

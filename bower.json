@@ -31,7 +31,9 @@
     "moment": "~2.8.1",
     "angular-socketio": "*",
     "ng-moment": "*",
-    "requirejs": "~2.1.14"
+    "requirejs": "~2.1.14",
+    "underscore": "~1.7.0",
+    "ng-underscore.js": "*"
   },
   "devDependencies": {
     "faker": "~0.0.2",

@@ -1,7 +1,12 @@
-requirejs.config({
-	appDir: 'src',
+var tests = [];
+for (var file in window.__karma__.files) {
+  if (/Spec\.js$/.test(file)) {
+    tests.push(file);
+  }
+}
 
-	baseUrl: 'js/application',
+requirejs.config({
+	baseUrl: '/base/src/js/application',
 
 	paths: {
 		// App modules
@@ -43,48 +48,43 @@ requirejs.config({
 		'User/Routes': 'components/user/routes',
 
 		// Dependencies
-		'angular': '/vendor/angular/angular.min',
+		'angular': '../../../bower_components/angular/angular.min',
 
-		'socket.io': '../../socket.io/socket.io',
+		'underscore': '../../../bower_components/underscore/underscore.min',
 
-		'underscore': '/vendor/underscore/underscore.min',
+		'moment': '../../../bower_components/moment/min/moment-with-locales.min',
 
-		'moment': '/vendor/moment/min/moment-with-locales.min',
-
-		'ngUnderscore': '/vendor/ng-underscore/dist/ng-underscore.min.js',
+		'ngUnderscore': '../../../bower_components/ng-underscore/dist/ng-underscore.min',
 
 		'ngRoute': [
-			'/vendor/angular-route/angular-route.min'
+			'../../../bower_components/angular-route/angular-route.min'
 		],
 
-		'ngSanitize': '/vendor/angular-sanitize/angular-sanitize.min',
+		'ngMock': '../../../bower_components/angular-mocks/angular-mocks',
 
-		'ngAnimate': '/vendor/angular-animate/angular-animate.min',
+		'ngSanitize': '../../../bower_components/angular-sanitize/angular-sanitize.min',
 
-		'ngResource': '/vendor/angular-resource/angular-resource.min',
+		'ngAnimate': '../../../bower_components/angular-animate/angular-animate.min',
 
-		'ngSocketIO': '/vendor/angular-socketio/dist/angular-socketio.min',
+		'ngResource': '../../../bower_components/angular-resource/angular-resource.min',
 
-		'ngMoment': '/vendor/ng-moment/dist/ng-moment.min',
+		'ngSocketIO': '../../../bower_components/angular-socketio/dist/angular-socketio.min',
 
-		'ngBootstrap': '/vendor/angular-bootstrap/ui-bootstrap-tpls.min',
+		'ngMoment': '../../../bower_components/ng-moment/dist/ng-moment.min',
+
+		'ngBootstrap': '../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
 
 		'ngStrap': [
-			'/vendor/angular-strap/dist/angular-strap.min',
-			'/vendor/angular-strap/dist/angular-strap.tpl.min'
+			'../../../bower_components/angular-strap/dist/angular-strap.min',
+			'../../../bower_components/angular-strap/dist/angular-strap.tpl.min'
 		],
 
-		'ngTranslate': '/vendor/angular-translate/angular-translate.min',
+		'ngTranslate': '../../../bower_components/angular-translate/angular-translate.min',
 
-		'ngPaginator': '/vendor/ng-paginator/angular-paginator.min',
+		'ngPaginator': '../../../bower_components/ng-paginator/angular-paginator.min',
 	},
 
 	shim: {
-		//
-		'App/Partials': {
-			deps: ['angular']
-		},
-
 		'angular': {
 			exports: 'angular'
 		},
@@ -98,6 +98,10 @@ requirejs.config({
 		},		
 
 		'ngRoute': {
+			deps: ['angular']
+		},
+
+		'ngMock': {
 			deps: ['angular']
 		},
 
@@ -136,7 +140,13 @@ requirejs.config({
 		'ngPaginator': {
 			deps: ['angular']
 		},
-	},
-});
 
-requirejs(['../starter']);
+		'partials.min': {
+			deps: ['angular']
+		}
+	},
+
+	deps: tests,
+
+	callback: window.__karma__.start
+});
