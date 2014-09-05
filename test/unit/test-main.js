@@ -14,7 +14,7 @@ requirejs.config({
 		'App/Controllers': 'controllers',
 		'App/Services': 'services',
 		'App/Routes': 'routes',
-		'App/Partials': 'partials.min',
+		'App/Partials': '../../../public/js/application/partials.min',
 		'App/Directives': 'directives',
 		'App/Filters': 'filters',
 
@@ -70,6 +70,8 @@ requirejs.config({
 
 		'ngSocketIO': '../../../bower_components/angular-socketio/dist/angular-socketio.min',
 
+		'socket.io': 'http://localhost:9876/socket.io/socket.io.js',
+
 		'ngMoment': '../../../bower_components/ng-moment/dist/ng-moment.min',
 
 		'ngBootstrap': '../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
@@ -85,6 +87,10 @@ requirejs.config({
 	},
 
 	shim: {
+		'App/Partials': {
+			deps: ['angular']
+		},
+
 		'angular': {
 			exports: 'angular'
 		},
@@ -95,7 +101,7 @@ requirejs.config({
 
 		'socket.io': {
 			exports: 'io'
-		},		
+		},
 
 		'ngRoute': {
 			deps: ['angular']
@@ -140,10 +146,6 @@ requirejs.config({
 		'ngPaginator': {
 			deps: ['angular']
 		},
-
-		'partials.min': {
-			deps: ['angular']
-		}
 	},
 
 	deps: tests,

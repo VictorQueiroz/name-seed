@@ -4,7 +4,7 @@ define([
 	'ngRoute',
 	'ngAnimate',
 	'ngSanitize',
-	// 'ngSocketIO',
+	'ngSocketIO',
 
 	'ngBootstrap',
 	'ngStrap',
@@ -14,7 +14,7 @@ define([
 	'App/Controllers',
 	'App/Filters',
 	'App/Services',
-	// 'App/Partials',
+	'App/Partials',
 	'App/Routes',
 	'App/Directives',
 
@@ -30,7 +30,7 @@ define([
 			'ngAnimate',
 			'ngSanitize',
 
-			// 'ngSocketIO',
+			'ngSocketIO',
 			'ui.bootstrap',
 			'mgcrea.ngStrap',	
 			'pascalprecht.translate',
@@ -40,7 +40,7 @@ define([
 			'App/Filters',
 			'App/Directives',
 			'App/Services',
-			// 'App/Partials',
+			'App/Partials',
 			'App/Routes',			
 
 			'Auth',
@@ -54,8 +54,6 @@ define([
 			$httpProvider.defaults.headers.common = {
 				'X-CSRF-Token': _CSRF
 			};
-
-			console.log('Configuring module: App');
 		}])
 
 		.run(['$rootScope', '$socket', function($rootScope, $socket) {
@@ -72,8 +70,6 @@ define([
 				$rootScope.$on('user disconnected', function () {
 				});
 			});
-
-			console.log('Running module: App');
 		}]);
 	
 

@@ -81,14 +81,14 @@ module.exports = function(config) {
       },
 
       {
+        pattern: 'http://localhost:9876/socket.io/socket.io.js',
+        included: false
+      },      
+
+      {
         pattern: 'src/js/application/**/*.js',
         included: false
       },
-
-      {
-        pattern: 'src/js/application/partials.min.js',
-        included: false
-      },      
 
       {
         pattern: 'test/unit/**/*-Spec.js',

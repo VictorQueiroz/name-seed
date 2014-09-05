@@ -13,11 +13,6 @@ define([
 		beforeEach(module(MODULE_NAME));
 
 		beforeEach(inject(function ($injector) {
-
-		}))
-
-		it('should', function () {
-			expect(1).toBe(1)
-		})
+		}));
 	});
 });

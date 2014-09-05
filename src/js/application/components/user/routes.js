@@ -5,8 +5,6 @@ define(['angular'], function (angular) {
 		.module('User/Routes', [])
 
 		.config(['$routeProvider', function ($routeProvider) {
-			console.log('Configuring module: User/Routes');
-
 			$routeProvider
 				.when('/users/:id', {
 					templateUrl: 'user/show.tpl.html',
@@ -28,9 +26,5 @@ define(['angular'], function (angular) {
 						$window.location.href = '/auth/destroy';
 					}
 				});
-		}])
-
-		.run(function () {
-			console.log('Running module: User/Routes');
-		});
+		}]);
 });
