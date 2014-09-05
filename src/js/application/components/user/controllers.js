@@ -1,9 +1,9 @@
 define([
 	'angular',
 
-	'User/Ctrl/Profile',
-	'User/Ctrl/UserDetail',
-	'User/Ctrl/UserCreate'
+	'User/Profile-Ctrl',
+	'User/UserDetail-Ctrl',
+	'User/UserCreate-Ctrl'
 ], function (angular) {
 	'use strict';
 

@@ -2,11 +2,11 @@ define([
 	'angular',
 	'ngRoute',
 
-	'User/Controllers',
-	'User/Routes',
-	'User/Services',
+	'User/controllers',
+	'User/routes',
+	'User/services',
 
-	'Session'
+	'Session/module'
 ], function (angular) {
 	'use strict';
 

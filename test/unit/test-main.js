@@ -10,42 +10,19 @@ requirejs.config({
 
 	paths: {
 		// App modules
-		'App': 'module',
-		'App/Controllers': 'controllers',
-		'App/Services': 'services',
-		'App/Routes': 'routes',
-		'App/Partials': '../../../public/js/application/partials.min',
-		'App/Directives': 'directives',
-		'App/Filters': 'filters',
+		'App': '.',
+		'App/partials': '../../../public/js/application/partials.min',
 
 		// Auth modules
-		'Auth': 'components/auth/module',
-		'Auth/Routes': 'components/auth/routes',
-		'Auth/Directives': 'components/auth/directives',
-		'Auth/Directive/IfAuthenticated': 'components/auth/IfAuthenticated-Directive',
-		'Auth/Directive/IfGuest': 'components/auth/IfGuest-Directive',
-		'Auth/Controllers': 'components/auth/controllers',
-		'Auth/Ctrl/Auth': 'components/auth/Auth-Ctrl',
+		'Auth': 'components/auth',
 
 		// Post modules
-		'Post': 'components/post/module',
-		'Post/Controllers': 'components/post/controllers',
-		'Post/Routes': 'components/post/routes',
-		'Post/Services': 'components/post/services',
+		'Post': 'components/post',
 
 		// Session modules
-		'Session': 'components/session/module',
-		'Session/Services': 'components/session/services',
-		'Session/Service': 'components/session/Session-Service',
+		'Session': 'components/session',
 
-		'User': 'components/user/module',
-		'User/Controllers': 'components/user/controllers',
-		'User/Ctrl/Profile': 'components/user/Profile-Ctrl',
-		'User/Ctrl/UserDetail': 'components/user/UserDetail-Ctrl',
-		'User/Ctrl/UserCreate': 'components/user/UserCreate-Ctrl',
-		'User/Services': 'components/user/services',
-		'User/Service': 'components/user/User-Service',
-		'User/Routes': 'components/user/routes',
+		'User': 'components/user',
 
 		// Dependencies
 		'angular': '../../../bower_components/angular/angular.min',
@@ -70,7 +47,7 @@ requirejs.config({
 
 		'ngSocketIO': '../../../bower_components/angular-socketio/dist/angular-socketio.min',
 
-		'socket.io': 'http://localhost:9876/socket.io/socket.io.js',
+		'socket.io': '../socket.io/socket.io',
 
 		'ngMoment': '../../../bower_components/ng-moment/dist/ng-moment.min',
 
@@ -87,12 +64,16 @@ requirejs.config({
 	},
 
 	shim: {
-		'App/Partials': {
+		'App/partials': {
 			deps: ['angular']
 		},
 
 		'angular': {
 			exports: 'angular'
+		},
+
+		'moment': {
+			exports: 'moment'
 		},
 
 		'underscore': {

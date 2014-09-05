@@ -1,7 +1,7 @@
 define([
 	'angular',
 	
-	'User/Service'
+	'User/User-Service'
 ], function (angular) {
 	'use strict';
 

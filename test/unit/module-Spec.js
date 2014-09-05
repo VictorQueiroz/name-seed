@@ -1,6 +1,6 @@
 define([
 	'ngMock',
-	'App'
+	'App/module'
 ], function () {
 	'use strict';
 
@@ -11,8 +11,5 @@ define([
 
 	describe(MODULE_NAME + ' module', function () {
 		beforeEach(module(MODULE_NAME));
-
-		beforeEach(inject(function ($injector) {
-		}));
 	});
 });

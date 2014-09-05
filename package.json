@@ -5,7 +5,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "karma start --no-single-run --log-level debug",
+    "test": "karma start --single-run",
     "start": "nodemon server.js"
   },
   "repository": {

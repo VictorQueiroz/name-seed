@@ -1,7 +1,7 @@
 define([
 	'angular',
 
-	'Auth/Ctrl/Auth'
+	'Auth/Auth-Ctrl'
 ], function (angular) {
 	'use strict';
 

@@ -1,8 +1,8 @@
 define([
 	'angular',
 
-	'Auth/Directive/IfAuthenticated',
-	'Auth/Directive/IfGuest'
+	'Auth/IfAuthenticated-Directive',
+	'Auth/IfGuest-Directive'
 ], function (angular) {
 	'use strict';
 

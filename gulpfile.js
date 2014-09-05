@@ -21,8 +21,8 @@ var fs = require('fs');
 
 var paths = {};
 paths.partials = [
-	'src/js/partials/**/*.tpl.html',
-	'src/js/components/**/partials/**/*.tpl.html',
+	'src/js/application/partials/**/*.tpl.html',
+	'src/js/application/components/**/partials/**/*.tpl.html',
 ];
 paths.stylesheets = ['src/scss/**/{,*/}*.{scss,sass}'];
 paths.scripts = ['src/js/**/{,*/}*.js'];
@@ -106,7 +106,7 @@ gulp.task('scripts', ['clean'], function () {
 });
 
 gulp.task('partials', ['clean'], function () {
-	var dest = path.join(paths.public, 'js');
+	var dest = path.join(paths.public, 'js', 'application');
 
 	return gulp.src(paths.partials)
 		.pipe(htmlmin({collapseWhitespace: true}))

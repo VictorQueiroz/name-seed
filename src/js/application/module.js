@@ -11,16 +11,16 @@ define([
 	'ngPaginator',
 	'ngTranslate',
 
-	'App/Controllers',
-	'App/Filters',
-	'App/Services',
-	'App/Partials',
-	'App/Routes',
-	'App/Directives',
+	'App/controllers',
+	'App/filters',
+	'App/services',
+	'App/partials',
+	'App/routes',
+	'App/directives',
 
-	'Auth',
-	// 'Post',
-	'User'
+	'Auth/module',
+	'Post/module',
+	'User/module'
 ], function (angular) {
 	'use strict';
 
@@ -44,7 +44,7 @@ define([
 			'App/Routes',			
 
 			'Auth',
-			// 'Post',
+			'Post',
 			'User'
 		])
 

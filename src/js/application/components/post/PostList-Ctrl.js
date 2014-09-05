@@ -18,6 +18,7 @@ define(['angular'], function (angular) {
 					page: page,
 					per_page: paginator.perPage
 				}).$promise.then(function(pag) {
+					$scope.posts = pag.data;
 					angular.extend(paginator, pag);
 				});
 			});

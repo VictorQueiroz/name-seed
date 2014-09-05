@@ -1,4 +1,4 @@
-define(['socket.io', 'App'], function (io, angular) {
+define(['socket.io', 'App/module'], function (io, angular) {
 	if(!window.hasOwnProperty('io')) {
 		window.io = io;
 	}

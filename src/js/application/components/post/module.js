@@ -1,13 +1,12 @@
 define([
 	'angular',
-	'socket.io',
 	'ngRoute',
 	'ngSocketIO',
 	'ngMoment',
 
-	'./controllers',
-	'./services',
-	'./routes'
+	'Post/controllers',
+	'Post/services',
+	'Post/routes'
 ], function (angular) {
 	'use strict';
 

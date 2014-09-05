@@ -1,10 +1,10 @@
 define([
 	'angular',
 
-	'./PostList-Ctrl',
-	'./PostDetail-Ctrl',
-	'./PostCreate-Ctrl',
-	'./PostEdit-Ctrl'
+	'Post/PostList-Ctrl',
+	'Post/PostDetail-Ctrl',
+	'Post/PostCreate-Ctrl',
+	'Post/PostEdit-Ctrl'
 ], function (angular) {
 	'use strict';
 

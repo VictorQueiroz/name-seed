@@ -1,4 +1,8 @@
-define(['ngMock'], function () {
+define([
+	'ngMock',
+
+	'Post/controllers'
+], function () {
 	'use strict';
 
 	var MODULE_NAME = 'Post/Controllers',

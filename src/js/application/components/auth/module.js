@@ -3,11 +3,11 @@ define([
 
 	'ngRoute',
 	'ngSocketIO',
-	'Session',
+	'Session/module',
 
-	'Auth/Controllers',
-	'Auth/Routes',
-	'Auth/Directives'
+	'Auth/controllers',
+	'Auth/routes',
+	'Auth/directives'
 ], function (angular) {
 	'use strict';
 
@@ -27,11 +27,9 @@ define([
 			});
 
 			socket.on('user unauthorized', function() {
-				console.log('Sorry, you can not access this area!');
 			});
 
 			socket.on('user authentication error', function () {
-				console.log('Ocorreu um erro, tente novamente mais tarde!');
 			});
 		});
 
@@ -42,33 +40,21 @@ define([
 		$rootScope.$on('$routeChangeStart', function(event, next) {
 			var params = next.$$route;
 
-			console.log('Checking if you can access this location...');
-
 			var isAuthenticated = Session.isAuthenticated;
 
-			if(params.guest) { // Only guests users will can go in.
-				console.log('This route are reserved for guests!');
-				console.log('Checking if you are a guest...');
+			if(!params || params.guest) return;
 
+			if(params.guest) { // Only guests users will can go in.
 				isAuthenticated().then(function(res) {
 					if(res.result) {
-						console.log('You are not a guest.');
-						console.log('You can not access this area.');
 						$location.path('/'); // Temporary, until $routeChangeStart can not prevent default this event.
 					} else if (!res.result) {
-						console.log('You are a guest, you can go on!');
 					}
 				});
 			} else if (params.authenticated) { // Only authenticated users will can go in.
-				console.log('This route are reserved for authenticated users!');
-				console.log('Checking if you are authenticated...');
 				isAuthenticated().then(function(res) {
 					if(!res.result) {
-						console.log('You are not authenticated.');
-						console.log('You can not access this area.');
 						$location.path('/'); // Temporary, until $routeChangeStart can not prevent default this event.
-					} else if (res.result) {
-						console.log('You are authenticated, you can go on!');
 					}
 				});
 			}

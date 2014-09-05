@@ -1,7 +1,7 @@
 define([
 	'angular',
 	
-	'Session/Services'
+	'Session/services'
 ], function (angular) {
 	'use strict';
 
