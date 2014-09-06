@@ -16,67 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       {
-        pattern: 'bower_components/angular/angular.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/underscore/underscore.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/moment/min/moment-with-locales.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/ng-underscore/dist/ng-underscore.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-route/angular-route.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-mocks/angular-mocks.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-sanitize/angular-sanitize.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-animate/angular-animate.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-resource/angular-resource.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-socketio/dist/angular-socketio.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/ng-moment/dist/ng-moment.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-strap/dist/angular-strap.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-strap/dist/angular-strap.tpl.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/angular-translate/angular-translate.min.js',
-        included: false
-      },
-      {
-        pattern: 'bower_components/ng-paginator/angular-paginator.min.js',
+        pattern: 'bower_components/**/*.{min.js,js}',
         included: false
       },
 
