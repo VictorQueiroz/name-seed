@@ -1,3 +1,6 @@
+/**
+ * Socket.IO false
+ */
 (function (window) {
 	var listeners = [],
 	events = [],
