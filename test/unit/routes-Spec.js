@@ -1,4 +1,7 @@
-(function () {
+define([
+	'ngMock',
+	'App/routes'
+], function () {
 	'use strict';
 
 	var MODULE_NAME = 'App/Routes',
@@ -11,4 +14,4 @@
 	describe(MODULE_NAME + ' module', function () {
 		beforeEach(module(MODULE_NAME));
 	});
-})();
+});

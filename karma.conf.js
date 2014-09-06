@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sat Aug 23 2014 14:00:56 GMT-0300 (BRT)
+// Generated on Thu Sep 04 2014 23:37:47 GMT-0300 (BRT)
 
 module.exports = function(config) {
   config.set({
@@ -10,33 +10,102 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'requirejs'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',      
-      'bower_components/ng-paginator/angular-paginator.min.js',
-      'bower_components/angular-resource/angular-resource.min.js',
-      'bower_components/angular-route/angular-route.min.js',
-      'bower_components/angular-translate/angular-translate.min.js',
-      'bower_components/angular-sanitize/angular-sanitize.min.js',
-      'bower_components/angular-cookies/angular-cookies.min.js',
-      'bower_components/angular-strap/dist/angular-strap.min.js',
-      'bower_components/angular-strap/dist/angular-strap.tpl.min.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'bower_components/angular-animate/angular-animate.min.js',
-      'bower_components/angular-socketio/dist/angular-socketio.min.js',
-      'bower_components/ng-moment/dist/ng-moment.min.js',
-      'src/js/**/{,*/}*.js',
-      'test/unit/**/{,*/}*Spec.js'
+      {
+        pattern: 'bower_components/angular/angular.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/underscore/underscore.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/moment/min/moment-with-locales.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/ng-underscore/dist/ng-underscore.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-route/angular-route.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-mocks/angular-mocks.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-sanitize/angular-sanitize.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-animate/angular-animate.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-resource/angular-resource.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-socketio/dist/angular-socketio.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/ng-moment/dist/ng-moment.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-strap/dist/angular-strap.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-strap/dist/angular-strap.tpl.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/angular-translate/angular-translate.min.js',
+        included: false
+      },
+      {
+        pattern: 'bower_components/ng-paginator/angular-paginator.min.js',
+        included: false
+      },
+
+      {
+        pattern: 'src/js/socket.io/socket.io.js',
+        included: false
+      },
+
+      {
+        pattern: 'public/js/application/partials.min.js',
+        included: false
+      },
+
+      {
+        pattern: 'src/js/application/**/*.js',
+        included: false
+      },
+
+      {
+        pattern: 'test/unit/**/*-Spec.js',
+        included: false
+      },
+
+      'test/unit/main.js'
     ],
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser

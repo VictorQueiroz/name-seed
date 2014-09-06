@@ -21,11 +21,11 @@ var fs = require('fs');
 
 var paths = {};
 paths.partials = [
-	'src/js/partials/**/*.tpl.html',
-	'src/js/components/**/partials/**/*.tpl.html',
+	'src/js/application/partials/**/*.tpl.html',
+	'src/js/application/components/**/partials/**/*.tpl.html',
 ];
 paths.stylesheets = ['src/scss/**/{,*/}*.{scss,sass}'];
-paths.scripts = ['src/js/**/{,*/}*.js'];
+paths.scripts = ['src/js/**/*.js'];
 paths.views = 'app/views';
 paths.public = 'public';
 
@@ -49,14 +49,10 @@ gulp.task('stylesheets', ['clean'], function () {
 // build all vendors
 gulp.task('vendors', ['clean'], function () {
 	var vendors = [
-		{name: 'codemirror', paths: [
-			'bower_components/codemirror/lib/codemirror.js',
-			'bower_components/codemirror/mode/**/*.js',
-			'!bower_components/codemirror/mode/**/*_test.js',
-			'!bower_components/codemirror/mode/**/test.js',
-			'bower_components/codemirror/addon/**/*.js'
-		]}, {	name: 'underscore', paths: [
+		{	name: 'underscore', paths: [
 			'bower_components/underscore/underscore-min.js'
+		]}, { name: 'requirejs', paths: [
+			'bower_components/requirejs/require.js'
 		]}
 	];
 
@@ -64,21 +60,19 @@ gulp.task('vendors', ['clean'], function () {
 		var dest = path.join(paths.public, 'vendor', vendor.name);
 
 		gulp.src(vendor.paths)
-			.pipe(sourcemaps.init())
-				.pipe(uglify({
-					compress: {
-						drop_debugger: true,
-						unused: true,
-						booleans: true,
-						// unsafe: true
-					}
-				}))
-				.pipe(concat(vendor.name))
-				.pipe(rename({
-					suffix: '.min',
-					extname: '.js'
-				}))
-			.pipe(sourcemaps.write())
+			.pipe(uglify({
+				compress: {
+					drop_debugger: true,
+					unused: true,
+					booleans: true,
+					// unsafe: true
+				}
+			}))
+			.pipe(concat(vendor.name))
+			.pipe(rename({
+				suffix: '.min',
+				extname: '.js'
+			}))
 			.pipe(gulp.dest(dest));
 	});
 });
@@ -107,13 +101,12 @@ gulp.task('scripts', ['clean'], function () {
 					comments: false
 				}
 			}))
-			.pipe(concat('base.min.js'))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(dest));
 });
 
 gulp.task('partials', ['clean'], function () {
-	var dest = path.join(paths.public, 'js');
+	var dest = path.join(paths.public, 'js', 'application');
 
 	return gulp.src(paths.partials)
 		.pipe(htmlmin({collapseWhitespace: true}))
@@ -133,7 +126,12 @@ gulp.task('partials', ['clean'], function () {
 
 gulp.task('server', ['clean'], function () {
 	nodemon({
-		script: 'server.js'
+		script: 'server.js',
+		ext: 'js',
+		ignore: [
+			'test/**',
+			'public/**'
+		]
 	})
 
 	.on('restart', function () {

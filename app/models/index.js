@@ -4,7 +4,7 @@ var fs = require('fs'),
 path = require('path'),
 lodash = require('lodash'),
 Sequelize = require('sequelize'),
-sequelize = require('../config/sequelize'),
+sequelize = require('../config/db'),
 db = {};
 
 fs

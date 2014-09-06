@@ -76,6 +76,7 @@ module.exports = function (sequelize) {
 	 * Transfer the 'bower_components' folder contents to '/vendor' of the 'public' folder.
 	 */
 	app.use('/vendor', express.static(path.join(__dirname, '../../bower_components')));
+	app.use('/js', express.static(path.join(__dirname, '../../src/js')));
 
 	// Development only
 	if (app.get('env') === 'development') {

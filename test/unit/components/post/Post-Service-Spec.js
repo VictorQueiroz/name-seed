@@ -1,4 +1,9 @@
-(function () {
+define([
+	'angular',
+	'ngMock',
+	'ngResource',
+	'Post/module'
+], function (angular) {
 	'use strict';
 
 	var MODULE_NAME = 'Post/Service',
@@ -167,4 +172,4 @@
 			});
 		});
 	});
-})();
+});

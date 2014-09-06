@@ -1,6 +1,6 @@
 {
-  "name": "mean-seed",
-  "version": "1.0.0",
+  "name": "name-seed",
+  "version": "1.1.0",
   "homepage": "https://github.com/VictorQueiroz/mean-seed",
   "moduleType": [
     "node"
@@ -30,7 +30,10 @@
     "ng-paginator": "*",
     "moment": "~2.8.1",
     "angular-socketio": "*",
-    "ng-moment": "*"
+    "ng-moment": "*",
+    "requirejs": "~2.1.14",
+    "underscore": "~1.7.0",
+    "ng-underscore.js": "*"
   },
   "devDependencies": {
     "faker": "~0.0.2",

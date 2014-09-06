@@ -4,6 +4,6 @@
   "eqeqeq": true,
   "undef": true,
   "unused": false,
-  "predef": ["console", "angular", "document"],
+  "predef": ["console", "angular", "document", "define", "require", "requirejs"],
   "es3": true
 }
