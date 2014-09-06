@@ -1,6 +1,6 @@
 var passport = require('passport'),
 FacebookStrategy = require('passport-facebook').Strategy,
-User = require('../../models').User,
+User = require('../../../models').User,
 
 FACEBOOK_APP_ID = '1451750288423459',
 FACEBOOK_APP_SECRET = 'ff03e49369c91ea824c9107480301e98',

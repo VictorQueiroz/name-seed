@@ -2,7 +2,7 @@
 
 var passport = require('passport'),
 path = require('path'),
-User = require('../models').User,
+User = require('../../models').User,
 fs = require('fs');		
 
 module.exports = function() {
@@ -25,11 +25,11 @@ module.exports = function() {
 	});
 
 	fs
-		.readdirSync(__dirname + '/strategies')
+		.readdirSync(path.join(__dirname, 'strategies'))
 		.filter(function(file) {
 			return (file !== 'index.js');
 		})
 		.forEach(function(file) {
-			require(path.join(__dirname, './strategies/' + file))();
+			require(path.join(__dirname, 'strategies', file))();
 		});
 };

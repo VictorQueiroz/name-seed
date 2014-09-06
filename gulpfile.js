@@ -25,7 +25,7 @@ paths.partials = [
 	'src/js/application/components/**/partials/**/*.tpl.html',
 ];
 paths.stylesheets = ['src/scss/**/{,*/}*.{scss,sass}'];
-paths.scripts = ['src/js/**/{,*/}*.js'];
+paths.scripts = ['src/js/**/*.js'];
 paths.views = 'app/views';
 paths.public = 'public';
 
@@ -126,7 +126,12 @@ gulp.task('partials', ['clean'], function () {
 
 gulp.task('server', ['clean'], function () {
 	nodemon({
-		script: 'server.js'
+		script: 'server.js',
+		ext: 'js',
+		ignore: [
+			'test/**',
+			'public/**'
+		]
 	})
 
 	.on('restart', function () {

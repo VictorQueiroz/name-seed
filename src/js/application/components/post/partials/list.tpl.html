@@ -1,10 +1,12 @@
 <div class="container" ng-init="view = 1">
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="btn-group">
+			<h3>Posts</h3>
+
+			<div class="form-group btn-group btn-group-xs">
 				<a class="btn btn-default" href="/posts/create">New post</a>
 				<button class="btn btn-default" ng-class="{ active: (view == 1) }" ng-click="view = (view == 1 ? 0 : 1)"><span class="fa fa-bars"></span> Change view</button>
-				<div class="btn-group dropdown">
+				<div class="btn-group btn-group-xs dropdown">
 					<button class="btn btn-default dropdown-toggle">
 						Per page
 
@@ -19,9 +21,9 @@
 			<table class="table" ng-show="(view == 1)">
 				<thead>
 					<th>Title</th>
-					<th>Body (preview)</th>
-					<th>Created at</th>
-					<th>Actions</th>
+					<th width="40%">Body (preview)</th>
+					<th width="10%">Created at</th>
+					<th width="10%">Actions</th>
 				</thead>
 
 				<tbody ng-repeat="post in posts">
@@ -30,7 +32,7 @@
 						<td ng-bind="post.body.substr(0, 200)"></td>
 						<td ng-bind="(post.created_at | momentFromNow)"></td>
 						<td>
-							<div class="btn-group">
+							<div class="btn-group btn-group-xs">
 								<button class="btn btn-default" ng-click="editPost(post)">Edit</button>
 								<button class="btn btn-default" ng-click="destroyPost(post)">Destroy</button>
 							</div>

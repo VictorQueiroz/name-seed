@@ -13,10 +13,10 @@ define([
 	angular
 		.module('User', [
 			'ngRoute',
-			// 'Session',
+			'Session',
 
-			// 'User/Controllers',
-			// 'User/Services',
-			// 'User/Routes'
+			'User/Controllers',
+			'User/Services',
+			'User/Routes'
 		]);
 });
